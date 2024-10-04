@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <PackageId>Amba.TfVars</PackageId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Antlr4 Include="TfVars.g4">
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        <Encoding>UTF-8</Encoding>
+        <TargetLanguage>CSharp</TargetLanguage>
+        <Listener>false</Listener>
+        <Visitor>true</Visitor>
+        <Abstract>false</Abstract>
+        <ForceAtn>false</ForceAtn>
+        <Error>true</Error>
+        <Log>true</Log>
+        <CustomToolNamespace>Amba.TvarsParser</CustomToolNamespace>
+        <Package>Amba.TvarsParser</Package>
+        <JavaExec>PATH</JavaExec>
+        <DefaultCustomToolNamespace>Amba.TfVarsParser</DefaultCustomToolNamespace>
+      </Antlr4>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Generated\" />
+    </ItemGroup>
+
+</Project>

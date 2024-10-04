@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amba.TfVarsCli", "Amba.TfVarsCli\Amba.TfVarsCli.csproj", "{70CA32B5-0CFE-42AB-B796-16AC6318E2EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amba.TfVars", "Amba.TfVars\Amba.TfVars.csproj", "{B36BD2F6-1EB0-4957-BB4C-F36EE296A038}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amba.TfVarsTests", "Amba.TfVarsTests\Amba.TfVarsTests.csproj", "{0477AA4B-EF66-40E4-92C3-7B7DC3246B34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70CA32B5-0CFE-42AB-B796-16AC6318E2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70CA32B5-0CFE-42AB-B796-16AC6318E2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70CA32B5-0CFE-42AB-B796-16AC6318E2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70CA32B5-0CFE-42AB-B796-16AC6318E2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B36BD2F6-1EB0-4957-BB4C-F36EE296A038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B36BD2F6-1EB0-4957-BB4C-F36EE296A038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B36BD2F6-1EB0-4957-BB4C-F36EE296A038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B36BD2F6-1EB0-4957-BB4C-F36EE296A038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0477AA4B-EF66-40E4-92C3-7B7DC3246B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0477AA4B-EF66-40E4-92C3-7B7DC3246B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0477AA4B-EF66-40E4-92C3-7B7DC3246B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0477AA4B-EF66-40E4-92C3-7B7DC3246B34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
