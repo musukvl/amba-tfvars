@@ -16,6 +16,7 @@ public class E2eTests
         CompareLines(expected, tfVarsStr);
     }
     
+        CompareLines(expected, tfVarsStr);
     private void CompareLines(string? expected, string? actual)
     {
         var expectedLines = expected.Split(Environment.NewLine);
