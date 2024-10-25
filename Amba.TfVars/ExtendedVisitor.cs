@@ -23,7 +23,7 @@ namespace Amba.TfVars
             foreach (var variableDefinition in context.variable_definition())
             {
                 var variable = (VariableDefinitionNode) Visit(variableDefinition);
-                result.Variables.Add(variable.Name, variable);   
+                result[variable.Name] = variable;   
             }
             return result;
         }

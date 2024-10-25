@@ -6,7 +6,7 @@ namespace Amba.TfVars
 {
     public static class TfVarsContent
     {
-        public static TfVarsNode? Deserialize(string input)
+        public static VarsFileNode? Parse(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -20,7 +20,7 @@ namespace Amba.TfVars
             var tree = parser.file_();
             var visitor = new ExtendedVisitor(tokenStream);
             var result = visitor.Visit(tree);
-            return result;
+            return result as VarsFileNode;
         }
 
         public static string Serialize(TfVarsNode? node, bool ident = true, int identSize = 4)
