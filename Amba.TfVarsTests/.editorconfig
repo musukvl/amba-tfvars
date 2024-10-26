@@ -1,0 +1,4 @@
+[*.cs]
+# Disable warnings for test
+dotnet_diagnostic.CS8602.severity = none
+dotnet_diagnostic.CS8604.severity = none

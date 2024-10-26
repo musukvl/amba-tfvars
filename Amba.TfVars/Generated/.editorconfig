@@ -1,0 +1,3 @@
+[*.cs]
+# Disable warnings for generated code
+dotnet_diagnostic.CS3021.severity = none

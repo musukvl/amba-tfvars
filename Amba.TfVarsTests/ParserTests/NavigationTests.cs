@@ -1,32 +1,30 @@
-using System.Net.Security;
 using Amba.TfVars;
-using Amba.TfVars.Model.Extensions;
+
+namespace Amba.TfVarsTests.ParserTests;
 
 public class NavigationTests
 {
-
     [Fact]
-    public void CheckString()
+    public void CheckNavigation()
     {
-        var varfile = @"
-        users = [ 
-            {
-                name = ""John""
-                email = ""x@x.com""
-                meta = {
-                    age = 30
-                }                    
-            },
-            {
-                name = ""Jane""
-                email = ""jane@x.com""
-                meta = {
-                    age = 25
-                }
-            }
-         ]
-        ";
-
+        const string varfile = """
+                               users = [ 
+                                   {
+                                       name = "John"
+                                       email = "x@x.com"
+                                       meta = {
+                                           age = 30
+                                       }                    
+                                   },
+                                   {
+                                       name = "Jane"
+                                       email = "jane@x.com"
+                                       meta = {
+                                           age = 25
+                                       }
+                                   }
+                                ]
+                               """;
         var parsed = TfVarsContent.Parse(varfile);
         Assert.Equal(25, (int)parsed["users"][1]["meta"]["age"]);
     }

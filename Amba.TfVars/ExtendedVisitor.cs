@@ -35,11 +35,6 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         return result;
     }
 
-    public override object VisitVal(TfVarsParser.ValContext context)
-    {
-        return base.VisitVal(context);
-    }
-
     public override object VisitString(TfVarsParser.StringContext context)
     {
         var str = context.GetText();
@@ -67,7 +62,7 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         foreach (var mapPair in context.map_pair())
         {
             var pair = (MapPairNode)Visit(mapPair);
-            result.Values.Add(pair);
+            result.Values.AddLast(pair);
         }
         return result;
     }

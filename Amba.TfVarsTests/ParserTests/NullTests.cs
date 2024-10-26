@@ -1,16 +1,13 @@
-using System.Net.Security;
 using Amba.TfVars;
-using Amba.TfVars.Model.Extensions;
+
+namespace Amba.TfVarsTests.ParserTests;
 
 public class NullTests
 {
     [Fact]
     public void CheckNullVariable()
     {
-        var varfile = """
-                      email = null
-                              
-                      """;
+        const string varfile = "email = null";
 
         var parsed = TfVarsContent.Parse(varfile);
         Assert.Null(parsed?["email"]);
@@ -19,13 +16,11 @@ public class NullTests
     [Fact]
     public void CheckNullMapProperty()
     {
-        var input = """
-                    
+        const string input = """
                              user = {
-                                email = null 
-                            }
-                            
-                    """;
+                                 email = null 
+                             }
+                             """;
 
         var varfile = TfVarsContent.Parse(input);
         Assert.NotNull(varfile);

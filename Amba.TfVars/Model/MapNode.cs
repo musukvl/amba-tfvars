@@ -6,7 +6,27 @@ namespace Amba.TfVars.Model;
 
 public class MapNode : TfVarsNode
 {
-    public List<MapPairNode> Values { get; } = new();
+    public LinkedList<MapPairNode> Values { get; } = new();
+
+    public MapNode()
+    {
+    }
+
+    public MapNode(Dictionary<string, TfVarsNode> values)
+    {
+        foreach (var (key, value) in values)
+        {
+            Values.AddLast(new MapPairNode(key, value));
+        }
+    }
+
+    public MapNode(params MapPairNode[] values)
+    {
+        foreach (var value in values)
+        {
+            Values.AddLast(value);
+        }
+    }
 
     public override TfVarsNode? this[object key]
     {
@@ -29,7 +49,7 @@ public class MapNode : TfVarsNode
                 }
                 else
                 {
-                    Values.Add(new MapPairNode(strKey, value));
+                    Values.AddLast(new MapPairNode(strKey, value));
                 }
             }
             throw new ArgumentException("Key must be a string", nameof(key));

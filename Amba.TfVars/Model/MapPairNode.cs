@@ -2,7 +2,7 @@
 
 public class MapPairNode : TfVarsNode
 {
-    public MapPairNode(string originalKey, TfVarsNode value)
+    public MapPairNode(string originalKey, TfVarsNode? value)
     {
         Key = originalKey.Trim('"');
         OriginalKey = originalKey;

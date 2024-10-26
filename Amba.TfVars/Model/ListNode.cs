@@ -8,6 +8,15 @@ public class ListNode : TfVarsNode
 {
     public List<TfVarsNode> Values { get; set; } = new();
 
+    public ListNode()
+    {
+    }
+
+    public ListNode(params TfVarsNode[] values)
+    {
+        Values.AddRange(values);
+    }
+
     public override TfVarsNode? this[object key]
     {
         get
@@ -25,7 +34,7 @@ public class ListNode : TfVarsNode
                 throw new ArgumentException("Key must be an integer", nameof(key));
             }
 
-            Values[intKey] = value;
+            Values[intKey] = value ?? throw new ArgumentNullException(nameof(value), "List element can't be null");
         }
     }
 }

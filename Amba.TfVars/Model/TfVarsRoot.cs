@@ -5,7 +5,20 @@ namespace Amba.TfVars.Model;
 
 public class TfVarsRoot : TfVarsNode
 {
-    public Dictionary<string, VariableDefinitionNode?> Variables { get; } = new();
+    public Dictionary<string, VariableDefinitionNode> Variables { get; } = new();
+
+
+    public TfVarsRoot()
+    {
+    }
+
+    public TfVarsRoot(Dictionary<string, TfVarsNode> values)
+    {
+        foreach (var (key, value) in values)
+        {
+            Variables[key] = new VariableDefinitionNode(key, value);
+        }
+    }
 
     public override TfVarsNode? this[object key]
     {
