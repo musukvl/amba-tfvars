@@ -23,13 +23,15 @@ var tfvarsString = TfVarsContent.Serialize(tfvarsNodes, indentSize: 4);
 - The parser doesn't support comments.
 - The parser doesn't do any validation on the content of the tfvars file.
 - The serializer does code format which is not the same as `terraform fmt` does.
+- The parser doesn't support multiline strings done with <<EOF syntax.
 
 
 # Release notes
 
-| Version | Description     |
-| ------- |-----------------|
-| 1.0.0   | Initial version |
+| Version | Description                                                                                        |
+|---------|----------------------------------------------------------------------------------------------------|
+| 1.1.0   | Base class has index operator for all nodes of parsed tree. The same as JToken in Newtonsoft.Json. |
+| 1.0.0   | Initial version                                                                                    |
 
 # License
 

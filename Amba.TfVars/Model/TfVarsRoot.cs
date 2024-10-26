@@ -1,18 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Amba.TfVars.Model;
 
-public class TfVarsRoot
+public class TfVarsRoot : TfVarsNode
 {
     public Dictionary<string, VariableDefinitionNode?> Variables { get; } = new();
 
-    public IVariableExpressionNode? this[string key]
+    public override TfVarsNode? this[object key]
     {
-        get => Variables.GetValueOrDefault(key)?.Value;
+        get
+        {
+            if (key is string strKey)
+            {
+                return Variables.GetValueOrDefault(strKey)?.Value;
+            }
+            throw new ArgumentException("Key must be a string", nameof(key));
+        }
         set
         {
-            var variableDefinition = new VariableDefinitionNode(key, value);
-            Variables[key] = variableDefinition;
+            if (key is string strKey)
+            {
+                Variables[strKey] = new VariableDefinitionNode(strKey, value);
+            }
+            throw new ArgumentException("Key must be a string", nameof(key));
         }
     }
 }

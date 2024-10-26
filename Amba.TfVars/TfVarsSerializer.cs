@@ -6,7 +6,7 @@ namespace Amba.TfVars;
 
 public static class TfVarsContent
 {
-    public static TfVarsRoot? Parse(string input)
+    public static TfVarsNode? Parse(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
         {
@@ -23,7 +23,7 @@ public static class TfVarsContent
         return result as TfVarsRoot;
     }
 
-    public static string Serialize(TfVarsRoot? node, bool ident = true, int identSize = 4)
+    public static string Serialize(TfVarsNode? node, bool ident = true, int identSize = 4)
     {
         if (node == null)
         {

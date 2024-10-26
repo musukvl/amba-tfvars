@@ -1,30 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Amba.TfVars.Model;
 
-public class MapNode : IVariableExpressionNode
+public class MapNode : TfVarsNode
 {
     public List<MapPairNode> Values { get; } = new();
 
-    //index operator
-    public IVariableExpressionNode? this[string key]
+    public override TfVarsNode? this[object key]
     {
         get
         {
-            return Values.FirstOrDefault(x => x.Key == key)?.Value;
+            if (key is string strKey)
+            {
+                return Values.FirstOrDefault(x => x.Key == strKey)?.Value;
+            }
+            throw new ArgumentException("Key must be a string", nameof(key));
         }
         set
         {
-            for (int i = 0; i < Values.Count; i++)
+            if (key is string strKey)
             {
-                if (Values[i].Key == key)
+                var existingPair = Values.FirstOrDefault(x => x.Key == strKey);
+                if (existingPair is not null)
                 {
-                    Values[i].Value = value;
-                    return;
+                    existingPair.Value = value;
+                }
+                else
+                {
+                    Values.Add(new MapPairNode(strKey, value));
                 }
             }
-            Values.Add(new MapPairNode(key, value));
+            throw new ArgumentException("Key must be a string", nameof(key));
         }
     }
 }

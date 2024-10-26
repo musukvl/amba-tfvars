@@ -1,6 +1,6 @@
 ﻿namespace Amba.TfVars.Model;
 
-public class StringNode : IVariableExpressionNode
+public class StringNode : TfVarsNode
 {
     public string Value { get; set; } = string.Empty;
 

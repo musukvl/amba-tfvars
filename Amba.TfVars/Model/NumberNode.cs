@@ -1,6 +1,6 @@
 ﻿namespace Amba.TfVars.Model;
 
-public class NumberNode : IVariableExpressionNode
+public class NumberNode : TfVarsNode
 {
     public decimal Value { get; set; }
 

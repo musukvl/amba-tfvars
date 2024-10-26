@@ -17,7 +17,7 @@ internal class TfVarsSerializer
         Ident = ident;
         _identSize = identSize;
     }
-    
+
     public void Serialize(object? node, int depth)
     {
         if (node is null)
@@ -31,7 +31,9 @@ internal class TfVarsSerializer
                 _sb.Append(numberNode.Value.ToString(CultureInfo.InvariantCulture));
                 break;
             case StringNode stringNode:
+                _sb.Append("\"");
                 _sb.Append(stringNode.Value);
+                _sb.Append("\"");
                 break;
             case BoolNode boolNode:
                 _sb.Append(boolNode.Value ? "true" : "false");

@@ -27,7 +27,7 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
 
     public override object VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
     {
-        var value = (IVariableExpressionNode)Visit(context.expression());
+        var value = (TfVarsNode)Visit(context.expression());
         var result = new VariableDefinitionNode(
             name: context.identifier().GetText(),
             value: value
@@ -35,9 +35,15 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         return result;
     }
 
+    public override object VisitVal(TfVarsParser.ValContext context)
+    {
+        return base.VisitVal(context);
+    }
+
     public override object VisitString(TfVarsParser.StringContext context)
     {
-        return new StringNode(context.GetText());
+        var str = context.GetText();
+        return new StringNode(str[1..^1]);
     }
 
     public override object VisitBoolean(TfVarsParser.BooleanContext context)
@@ -70,7 +76,7 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
     {
         var key = context.map_key().GetText();
         var value = Visit(context.expression());
-        var result = new MapPairNode(key, (IVariableExpressionNode)value);
+        var result = new MapPairNode(key, (TfVarsNode)value);
         return result;
     }
 
@@ -80,7 +86,7 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
 
         foreach (var expression in context.expression())
         {
-            result.Values.Add((IVariableExpressionNode)Visit(expression));
+            result.Values.Add((TfVarsNode)Visit(expression));
         }
         return result;
     }
