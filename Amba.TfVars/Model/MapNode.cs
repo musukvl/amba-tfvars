@@ -28,6 +28,11 @@ public class MapNode : TfVarsNode
         }
     }
 
+    public override IEnumerable<TfVarsNode> Children()
+    {
+        return Values;
+    }
+
     public override TfVarsNode? this[object key]
     {
         get

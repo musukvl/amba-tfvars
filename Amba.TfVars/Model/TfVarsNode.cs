@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Amba.TfVars.Model;
 
-public abstract class TfVarsNode
+public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
 {
     /// <summary>
     /// Gets the <see cref="JToken"/> with the specified key.
@@ -52,5 +55,18 @@ public abstract class TfVarsNode
     }
 
 
+    public IEnumerator<TfVarsNode> GetEnumerator()
+    {
+        return Children().GetEnumerator();
+    }
 
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public virtual IEnumerable<TfVarsNode> Children()
+    {
+        return Enumerable.Empty<TfVarsNode>();
+    }
 }
