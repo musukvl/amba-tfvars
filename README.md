@@ -50,7 +50,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
-| 1.1.1   | Add constructors for constructing tfvars configuraton in c# code                                   |
+| 1.1.2   | Add constructors for constructing tfvars configuraton in c# code                                   |
 | 1.1.0   | Base class has index operator for all nodes of parsed tree. The same as JToken in Newtonsoft.Json. |
 | 1.0.0   | Initial version                                                                                    |
 
