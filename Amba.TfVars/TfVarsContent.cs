@@ -3,10 +3,12 @@ using System.Globalization;
 using System.Text;
 using Amba.TfVars.Model;
 
+namespace Amba.TfVars;
+
 internal class TfVarsSerializer
 {
     private readonly StringBuilder _sb;
-    private bool Ident { get; } = false;
+    private bool Ident { get; }
     private readonly int _identSize;
 
     public TfVarsSerializer(StringBuilder sb, bool ident, int identSize)
@@ -16,15 +18,22 @@ internal class TfVarsSerializer
         _identSize = identSize;
     }
 
-    public void Serialize(ITfVarsNode node, int depth)
+    public void Serialize(object? node, int depth)
     {
+        if (node is null)
+        {
+            _sb.Append("null");
+            return;
+        }
         switch (node)
         {
             case NumberNode numberNode:
                 _sb.Append(numberNode.Value.ToString(CultureInfo.InvariantCulture));
                 break;
             case StringNode stringNode:
+                _sb.Append("\"");
                 _sb.Append(stringNode.Value);
+                _sb.Append("\"");
                 break;
             case BoolNode boolNode:
                 _sb.Append(boolNode.Value ? "true" : "false");

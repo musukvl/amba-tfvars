@@ -1,114 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Amba.TfVars.Model;
 using Antlr4.Runtime;
-using Antlr4.Runtime.Tree;
 
-namespace Amba.TfVars
+namespace Amba.TfVars;
+
+public class ExtendedVisitor : TfVarsBaseVisitor<object>
 {
-    public class ExtendedVisitor : TfVarsBaseVisitor<ITfVarsNode>
+    private readonly ITokenStream _tokenStream;
+
+    public ExtendedVisitor(ITokenStream tokenStream)
     {
-        private readonly ITokenStream _tokenStream;
+        _tokenStream = tokenStream;
+    }
 
-        public ExtendedVisitor(ITokenStream tokenStream)
+    public override object VisitFile_(TfVarsParser.File_Context context)
+    {
+        var result = new TfVarsRoot();
+        foreach (var variableDefinition in context.variable_definition())
         {
-            _tokenStream = tokenStream;
+            var variable = (VariableDefinitionNode)Visit(variableDefinition);
+            result.Variables[variable.Name] = variable;
         }
+        return result;
+    }
 
-        public override ITfVarsNode VisitFile_(TfVarsParser.File_Context context)
+    public override object VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
+    {
+        var value = (TfVarsNode)Visit(context.expression());
+        var result = new VariableDefinitionNode(
+            name: context.identifier().GetText(),
+            value: value
+        );
+        return result;
+    }
+
+    public override object VisitVal(TfVarsParser.ValContext context)
+    {
+        return base.VisitVal(context);
+    }
+
+    public override object VisitString(TfVarsParser.StringContext context)
+    {
+        var str = context.GetText();
+        return new StringNode(str[1..^1]);
+    }
+
+    public override object VisitBoolean(TfVarsParser.BooleanContext context)
+    {
+        return new BoolNode(context.GetText().ToLower() == "true");
+    }
+
+    public override object VisitNumber(TfVarsParser.NumberContext context)
+    {
+        return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
+    }
+
+    public override object VisitSigned_number(TfVarsParser.Signed_numberContext context)
+    {
+        return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
+    }
+
+    public override object VisitMap_(TfVarsParser.Map_Context context)
+    {
+        var result = new MapNode();
+        foreach (var mapPair in context.map_pair())
         {
-            var result = new TfVarsRoot();
-            foreach (var variableDefinition in context.variable_definition())
-            {
-                var variable = (VariableDefinitionNode)Visit(variableDefinition);
-                result.Variables[variable.Name] = variable;
-            }
-            return result;
+            var pair = (MapPairNode)Visit(mapPair);
+            result.Values.Add(pair);
         }
+        return result;
+    }
 
-        public override ITfVarsNode VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
+    public override object VisitMap_pair(TfVarsParser.Map_pairContext context)
+    {
+        var key = context.map_key().GetText();
+        var value = Visit(context.expression());
+        var result = new MapPairNode(key, (TfVarsNode)value);
+        return result;
+    }
+
+    public override object VisitList_(TfVarsParser.List_Context context)
+    {
+        var result = new ListNode();
+
+        foreach (var expression in context.expression())
         {
-            var result = new VariableDefinitionNode(
-                name: context.identifier().GetText(),
-                value: Visit(context.expression())
-            );
-            return result;
+            result.Values.Add((TfVarsNode)Visit(expression));
         }
+        return result;
+    }
 
-        public override ITfVarsNode VisitString(TfVarsParser.StringContext context)
+    private string GetCommentsAfterToken(IToken token)
+    {
+        var comments = new List<string>();
+        var t = _tokenStream.Get(token.TokenIndex + 1);
+
+        if (t.Channel == Lexer.Hidden)
         {
-            return new StringNode(context.GetText());
+            comments.Add(t.Text);
         }
+        return string.Join(", ", comments);
+    }
 
-        public override ITfVarsNode VisitBoolean(TfVarsParser.BooleanContext context)
+    private string GetCommentsBeforeToken(IToken token)
+    {
+        var comments = new List<string>();
+        var t = _tokenStream.Get(token.TokenIndex - 1);
+
+        if (t.Channel == Lexer.Hidden)
         {
-            return new BoolNode(context.GetText().ToLower() == "true");
+            comments.Add(t.Text);
         }
-
-        public override ITfVarsNode VisitNumber(TfVarsParser.NumberContext context)
-        {
-            return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
-        }
-
-        public override ITfVarsNode VisitSigned_number(TfVarsParser.Signed_numberContext context)
-        {
-            return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
-        }
-
-        public override ITfVarsNode VisitMap_(TfVarsParser.Map_Context context)
-        {
-            var result = new MapNode();
-            foreach (var mapPair in context.map_pair())
-            {
-                var pair = (MapPairNode)Visit(mapPair);
-                result.Values.Add(pair);
-            }
-            return result;
-        }
-
-        public override ITfVarsNode VisitMap_pair(TfVarsParser.Map_pairContext context)
-        {
-            var key = context.map_key().GetText();
-            var value = Visit(context.expression());
-            var result = new MapPairNode(key, value);
-            return result;
-        }
-
-        public override ITfVarsNode VisitList_(TfVarsParser.List_Context context)
-        {
-            var result = new ListNode();
-
-            foreach (var expression in context.expression())
-            {
-                result.Values.Add(Visit(expression));
-            }
-            return result;
-        }
-
-        private string GetCommentsAfterToken(IToken token)
-        {
-            var comments = new List<string>();
-            var t = _tokenStream.Get(token.TokenIndex + 1);
-
-            if (t.Channel == Lexer.Hidden)
-            {
-                comments.Add(t.Text);
-            }
-            return string.Join(", ", comments);
-        }
-
-        private string GetCommentsBeforeToken(IToken token)
-        {
-            var comments = new List<string>();
-            var t = _tokenStream.Get(token.TokenIndex - 1);
-
-            if (t.Channel == Lexer.Hidden)
-            {
-                comments.Add(t.Text);
-            }
-            return string.Join(", ", comments);
-        }
+        return string.Join(", ", comments);
     }
 }
