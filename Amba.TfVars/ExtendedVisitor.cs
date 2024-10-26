@@ -8,7 +8,7 @@ using Antlr4.Runtime.Tree;
 
 namespace Amba.TfVars
 {
-    public class ExtendedVisitor : TfVarsBaseVisitor<ITfVarsNode>
+    public class ExtendedVisitor : TfVarsBaseVisitor<object>
     {
         private readonly ITokenStream _tokenStream;
 
@@ -17,7 +17,7 @@ namespace Amba.TfVars
             _tokenStream = tokenStream;
         }
 
-        public override ITfVarsNode VisitFile_(TfVarsParser.File_Context context)
+        public override object VisitFile_(TfVarsParser.File_Context context)
         {
             var result = new TfVarsRoot();
             foreach (var variableDefinition in context.variable_definition())
@@ -28,36 +28,37 @@ namespace Amba.TfVars
             return result;
         }
 
-        public override ITfVarsNode VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
+        public override object VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
         {
+            var value = (ITfVarsNode)Visit(context.expression());
             var result = new VariableDefinitionNode(
                 name: context.identifier().GetText(),
-                value: Visit(context.expression())
+                value: value
             );
             return result;
         }
 
-        public override ITfVarsNode VisitString(TfVarsParser.StringContext context)
+        public override object VisitString(TfVarsParser.StringContext context)
         {
             return new StringNode(context.GetText());
         }
 
-        public override ITfVarsNode VisitBoolean(TfVarsParser.BooleanContext context)
+        public override object VisitBoolean(TfVarsParser.BooleanContext context)
         {
             return new BoolNode(context.GetText().ToLower() == "true");
         }
 
-        public override ITfVarsNode VisitNumber(TfVarsParser.NumberContext context)
+        public override object VisitNumber(TfVarsParser.NumberContext context)
         {
             return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
         }
 
-        public override ITfVarsNode VisitSigned_number(TfVarsParser.Signed_numberContext context)
+        public override object VisitSigned_number(TfVarsParser.Signed_numberContext context)
         {
             return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
         }
 
-        public override ITfVarsNode VisitMap_(TfVarsParser.Map_Context context)
+        public override object VisitMap_(TfVarsParser.Map_Context context)
         {
             var result = new MapNode();
             foreach (var mapPair in context.map_pair())
@@ -68,21 +69,21 @@ namespace Amba.TfVars
             return result;
         }
 
-        public override ITfVarsNode VisitMap_pair(TfVarsParser.Map_pairContext context)
+        public override object VisitMap_pair(TfVarsParser.Map_pairContext context)
         {
             var key = context.map_key().GetText();
             var value = Visit(context.expression());
-            var result = new MapPairNode(key, value);
+            var result = new MapPairNode(key, (ITfVarsNode)value);
             return result;
         }
 
-        public override ITfVarsNode VisitList_(TfVarsParser.List_Context context)
+        public override object VisitList_(TfVarsParser.List_Context context)
         {
             var result = new ListNode();
 
             foreach (var expression in context.expression())
             {
-                result.Values.Add(Visit(expression));
+                result.Values.Add((ITfVarsNode)Visit(expression));
             }
             return result;
         }
