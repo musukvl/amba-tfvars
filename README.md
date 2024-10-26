@@ -1,7 +1,8 @@
-﻿# TfVars files parser and serializer
+﻿# Terraform TfVars files parser and serializer for DotNet C#
 
-This is a simple parser and serializer for Terraform .tfvars files into a tree of nodes.
-The main purpose is to provide a way to process and transform tfvars files.
+
+This is a simple parser and serializer for Terraform `.tfvars` files into a tree of nodes.
+The main purpose is to provide a way to process and transform `.tfvars` files.
 It is written in C# and it is based on the  [ANTLR4](https://www.antlr.org/) library.
 
 ## Usage

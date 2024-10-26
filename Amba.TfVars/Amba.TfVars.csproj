@@ -5,6 +5,13 @@
         <Nullable>enable</Nullable>
         <PackageId>Amba.TfVars</PackageId>
         <LangVersion>latest</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>TfVars parser and serializer for .Net</Title>
+        <Description>Amba.TfVars parser package provides parsing and serialization tools for processing Terraform .tfvars files.</Description>
+        <PackageProjectUrl>https://github.com/musukvl/amba-tfvars</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/musukvl/amba-tfvars</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+        <PackageTags>tfvars;terraform;parser</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
