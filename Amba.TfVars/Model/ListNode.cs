@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Amba.TfVars.Model
+namespace Amba.TfVars.Model;
+
+public class ListNode : IVariableExpressionNode
 {
-    public class ListNode : ITfVarsNode
-    {
-        public List<ITfVarsNode> Values { get; set; } = new List<ITfVarsNode>();
-    }
+    public List<IVariableExpressionNode> Values { get; set; } = new List<IVariableExpressionNode>();
 }

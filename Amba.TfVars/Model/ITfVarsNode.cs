@@ -1,6 +1,5 @@
-﻿namespace Amba.TfVars.Model
+﻿namespace Amba.TfVars.Model;
+
+public interface IVariableExpressionNode
 {
-    public interface ITfVarsNode
-    {
-    }
 }

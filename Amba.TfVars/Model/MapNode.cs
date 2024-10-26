@@ -1,31 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Amba.TfVars.Model
-{
-    public class MapNode : ITfVarsNode
-    {
-        public List<MapPairNode> Values { get; private set; } = new List<MapPairNode>();
+namespace Amba.TfVars.Model;
 
-        //index operator
-        public MapPairNode? this[string key]
+public class MapNode : IVariableExpressionNode
+{
+    public List<MapPairNode> Values { get; } = new();
+
+    //index operator
+    public IVariableExpressionNode? this[string key]
+    {
+        get
         {
-            get
+            return Values.FirstOrDefault(x => x.Key == key)?.Value;
+        }
+        set
+        {
+            for (int i = 0; i < Values.Count; i++)
             {
-                return Values.FirstOrDefault(x => x.Key == key);
-            }
-            set
-            {
-                for (int i = 0; i < Values.Count; i++)
+                if (Values[i].Key == key)
                 {
-                    if (Values[i].Key == key)
-                    {
-                        Values[i] = value;
-                        return;
-                    }
+                    Values[i].Value = value;
+                    return;
                 }
-                Values.Add(value);
             }
+            Values.Add(new MapPairNode(key, value));
         }
     }
 }

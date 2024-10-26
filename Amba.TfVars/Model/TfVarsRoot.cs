@@ -1,20 +1,18 @@
 ﻿using System.Collections.Generic;
 
-namespace Amba.TfVars.Model
-{
-    public class TfVarsRoot : ITfVarsNode
-    {
-        public Dictionary<string, VariableDefinitionNode?> Variables { get; private set; } =
-            new Dictionary<string, VariableDefinitionNode?>();
+namespace Amba.TfVars.Model;
 
-        public ITfVarsNode? this[string key]
+public class TfVarsRoot
+{
+    public Dictionary<string, VariableDefinitionNode?> Variables { get; } = new();
+
+    public IVariableExpressionNode? this[string key]
+    {
+        get => Variables.GetValueOrDefault(key)?.Value;
+        set
         {
-            get => Variables.GetValueOrDefault(key);
-            set
-            {
-                var variableDefinition = new VariableDefinitionNode(key, value);
-                Variables[key] = variableDefinition;
-            }
+            var variableDefinition = new VariableDefinitionNode(key, value);
+            Variables[key] = variableDefinition;
         }
     }
 }

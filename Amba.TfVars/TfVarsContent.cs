@@ -3,10 +3,12 @@ using System.Globalization;
 using System.Text;
 using Amba.TfVars.Model;
 
+namespace Amba.TfVars;
+
 internal class TfVarsSerializer
 {
     private readonly StringBuilder _sb;
-    private bool Ident { get; } = false;
+    private bool Ident { get; }
     private readonly int _identSize;
 
     public TfVarsSerializer(StringBuilder sb, bool ident, int identSize)
@@ -15,9 +17,14 @@ internal class TfVarsSerializer
         Ident = ident;
         _identSize = identSize;
     }
-
-    public void Serialize(ITfVarsNode node, int depth)
+    
+    public void Serialize(object? node, int depth)
     {
+        if (node is null)
+        {
+            _sb.Append("null");
+            return;
+        }
         switch (node)
         {
             case NumberNode numberNode:

@@ -1,16 +1,15 @@
-﻿namespace Amba.TfVars.Model
+﻿namespace Amba.TfVars.Model;
+
+public class BoolNode : IVariableExpressionNode
 {
-    public class BoolNode : ITfVarsNode
+    public bool Value { get; set; }
+
+    public BoolNode()
     {
-        public bool Value { get; set; }
+    }
 
-        public BoolNode()
-        {
-        }
-
-        public BoolNode(bool value)
-        {
-            Value = value;
-        }
+    public BoolNode(bool value)
+    {
+        Value = value;
     }
 }
