@@ -10,8 +10,10 @@
         <Description>Amba.TfVars parser package provides parsing and serialization tools for processing Terraform .tfvars files.</Description>
         <PackageProjectUrl>https://github.com/musukvl/amba-tfvars</PackageProjectUrl>
         <RepositoryUrl>https://github.com/musukvl/amba-tfvars</RepositoryUrl>
-        <RepositoryType>github</RepositoryType>
+        <RepositoryType>git</RepositoryType>
         <PackageTags>tfvars;terraform;parser</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,11 +32,19 @@
         <Package>Amba.TvarsParser</Package>
         <JavaExec>PATH</JavaExec>
         <DefaultCustomToolNamespace>Amba.TfVarsParser</DefaultCustomToolNamespace>
+  
+          
       </Antlr4>
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
     </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+    
 
 </Project>

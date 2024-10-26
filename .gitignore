@@ -4,3 +4,4 @@ obj/
 .user
 .so
 .DotSettings.user
+.nupkg
