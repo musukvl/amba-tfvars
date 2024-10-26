@@ -4,6 +4,8 @@ indent_size = 4
 max_line_length = 200
 end_of_line = lf
 
+[{*.yml,*.yaml}]
+indent_size = 2
 
 [*.cs]
 # Disable the "Convert to primary constructor" inspection

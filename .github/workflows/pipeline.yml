@@ -7,24 +7,44 @@ on:
         branches: [ main ]
 
 jobs:
-    build:
+  build:      
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4              
+  
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+  
+      - name: Restore dependencies
+        run: dotnet restore
+  
+      - name: Build
+        run: dotnet build --no-restore
+  
+      - name: Test
+        run: dotnet test --no-build --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
         
-        runs-on: ubuntu-latest
-        
-        steps:
-
-            - uses: actions/checkout@v2
-
-            - name: Setup .NET
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: 8.0.x
-
-            - name: Restore dependencies
-              run: dotnet restore
-
-            - name: Build
-              run: dotnet build --no-restore
-
-            - name: Test
-              run: dotnet test --no-build --verbosity normal
+      - name: Publish test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Results
+          path: ./TestResults/test_results.trx
+          
+      - name: Generate code coverage report
+        if: success()
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          reportgenerator -reports:./TestResults/test_results.trx -targetdir:./TestResults/coverage -reporttypes:HtmlInline_AzurePipelines
+          
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coverage Report
+          path: ./TestResults/coverage
+                  
+      - name: Display Coverage Report
+        if: success()
+        run: echo "![Coverage Report](./TestResults/coverage/index.html)" >> $GITHUB_STEP_SUMMARY

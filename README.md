@@ -19,6 +19,25 @@ var tfvarsNodes = TfVarsContent.Deserialize("key = value");
 var tfvarsString = TfVarsContent.Serialize(tfvarsNodes, indentSize: 4);
 ```
 
+### Tree navigation
+
+```csharp
+const string varfile = """
+                           users = [                                
+                               {
+                                   name = "Jane"
+                                   email = "jane@x.com"
+                                   meta = {
+                                       age = 25
+                                   }
+                               }
+                            ]
+                       """;
+var parsed = TfVarsContent.Parse(varfile);
+Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
+
+```
+
 ## Known limitations
 
 - The parser doesn't support comments.
