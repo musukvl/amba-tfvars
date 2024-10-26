@@ -1,13 +1,14 @@
 ﻿namespace Amba.TfVars.Model
 {
-    public class VariableDefinitionNode : TfVarsNode
+    public class VariableDefinitionNode : ITfVarsNode
     {
         public string Name { get; set; }
-        public TfVarsNode TfVars { get; set; }
+        public ITfVarsNode Value { get; set; }
 
-        public override string ToString()
+        public VariableDefinitionNode(string name, ITfVarsNode value)
         {
-            return $"{Name} = {TfVars}" ;
+            Name = name;
+            Value = value;
         }
     }
 }

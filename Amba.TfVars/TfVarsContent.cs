@@ -16,7 +16,7 @@ internal class TfVarsSerializer
         _identSize = identSize;
     }
 
-    public void Serialize(TfVarsNode node, int depth)
+    public void Serialize(ITfVarsNode node, int depth)
     {
         switch (node)
         {
@@ -35,7 +35,7 @@ internal class TfVarsSerializer
             case MapNode mapNode:
                 SerializeMap(mapNode, depth);
                 break;
-            case VarsFileNode varsFileNode:
+            case TfVarsRoot varsFileNode:
                 SerializeVarsFile(varsFileNode, depth);
                 break;
             case VariableDefinitionNode variableDefinitionNode:
@@ -48,7 +48,7 @@ internal class TfVarsSerializer
     {
         AppendIdented(variableDefinitionNode.Name, depth);
         _sb.Append(" = ");
-        Serialize(variableDefinitionNode.TfVars, depth + 1);
+        Serialize(variableDefinitionNode.Value, depth + 1);
         _sb.AppendLine();
     }
 
@@ -72,16 +72,16 @@ internal class TfVarsSerializer
         {
             AppendIdented(mapPair.OriginalKey, depth);
             _sb.Append(" = ");
-            Serialize(mapPair.TfVars, depth + 1);
+            Serialize(mapPair.Value, depth + 1);
             _sb.AppendLine();
         }
 
         AppendIdented("}", depth - 1);
     }
 
-    private void SerializeVarsFile(VarsFileNode varsFileNode, int depth)
+    private void SerializeVarsFile(TfVarsRoot tfVarsRoot, int depth)
     {
-        foreach (var var in varsFileNode.Variables)
+        foreach (var var in tfVarsRoot.Variables)
         {
             this.SerializeVaribleDefinition(var.Value, 0);
         }

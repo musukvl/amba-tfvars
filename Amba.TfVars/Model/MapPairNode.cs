@@ -1,16 +1,16 @@
 ﻿namespace Amba.TfVars.Model
 {
-    public class MapPairNode : TfVarsNode
+    public class MapPairNode : ITfVarsNode
     {
-        public MapPairNode(string originalKey, TfVarsNode tfVars)
+        public MapPairNode(string originalKey, ITfVarsNode value)
         {
             Key = originalKey.Trim('"');
             OriginalKey = originalKey;
-            TfVars = tfVars;
+            Value = value;
         }
-        
+
         public string Key { get; }
-        public string OriginalKey { get;  }
-        public TfVarsNode TfVars { get; }
+        public string OriginalKey { get; }
+        public ITfVarsNode Value { get; }
     }
 }

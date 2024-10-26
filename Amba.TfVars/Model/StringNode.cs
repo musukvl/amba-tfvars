@@ -1,13 +1,13 @@
 ﻿namespace Amba.TfVars.Model
 {
-    public class StringNode : TfVarsNode
+    public class StringNode : ITfVarsNode
     {
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
 
         public StringNode()
         {
         }
-    
+
         public StringNode(string value)
         {
             Value = value;

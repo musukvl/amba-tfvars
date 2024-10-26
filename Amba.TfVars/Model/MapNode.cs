@@ -1,25 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Amba.TfVars.Model
 {
-    public class MapNode : TfVarsNode
+    public class MapNode : ITfVarsNode
     {
-        public List<MapPairNode> Values { get; set; } = new List<MapPairNode>();
-        
+        public List<MapPairNode> Values { get; private set; } = new List<MapPairNode>();
+
         //index operator
-        public MapPairNode this[string key]
+        public MapPairNode? this[string key]
         {
             get
             {
-                foreach (var value in Values)
-                {
-                    if (value.Key == key)
-                    {
-                        return value;
-                    }
-                }
-                return null;
+                return Values.FirstOrDefault(x => x.Key == key);
             }
             set
             {
