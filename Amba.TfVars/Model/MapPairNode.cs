@@ -9,7 +9,19 @@ public class MapPairNode : TfVarsNode
         Value = value;
     }
 
+    public override TfVarsNode? this[object key]
+    {
+        get => Value?[key];
+        set
+        {
+            if (Value != null) 
+                Value[key] = value;
+        }
+    }
+
     public string Key { get; }
     public string OriginalKey { get; }
     public TfVarsNode? Value { get; set; }
+
+ 
 }

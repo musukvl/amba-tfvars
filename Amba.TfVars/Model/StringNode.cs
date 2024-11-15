@@ -12,4 +12,9 @@ public class StringNode : TfVarsNode
     {
         Value = value;
     }
+
+    public override string ToString()
+    {
+        return Value;
+    }
 }
