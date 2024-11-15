@@ -19,8 +19,9 @@ IDENTIFIER=18
 STRING=19
 LINECOMMENT=20
 BLOCKCOMMENT=21
-WS=22
-DOT=23
+EOLS=22
+WS=23
+DOT=24
 '='=1
 '['=2
 ']'=3
@@ -34,4 +35,4 @@ DOT=23
 '('=11
 ')'=12
 'null'=14
-'.'=23
+'.'=24

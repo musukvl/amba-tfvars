@@ -22,6 +22,5 @@ public class MapPairNode : TfVarsNode
     public string Key { get; }
     public string OriginalKey { get; }
     public TfVarsNode? Value { get; set; }
-
- 
+    public string[] CommentBefore { get; set; }
 }

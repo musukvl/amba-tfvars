@@ -40,7 +40,7 @@ public partial class TfVarsParser : Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, LCURL=9, 
 		RCURL=10, LPAREN=11, RPAREN=12, EOF_=13, NULL_=14, NATURAL_NUMBER=15, 
 		DESCRIPTION=16, MULTILINESTRING=17, IDENTIFIER=18, STRING=19, LINECOMMENT=20, 
-		BLOCKCOMMENT=21, WS=22, DOT=23;
+		BLOCKCOMMENT=21, EOLS=22, WS=23, DOT=24;
 	public const int
 		RULE_file_ = 0, RULE_variable_definition = 1, RULE_identifier = 2, RULE_expression = 3, 
 		RULE_section = 4, RULE_val = 5, RULE_index = 6, RULE_list_ = 7, RULE_map_ = 8, 
@@ -55,13 +55,13 @@ public partial class TfVarsParser : Parser {
 	private static readonly string[] _LiteralNames = {
 		null, "'='", "'['", "']'", "','", "'+'", "'-'", "'true'", "'false'", "'{'", 
 		"'}'", "'('", "')'", null, "'null'", null, null, null, null, null, null, 
-		null, null, "'.'"
+		null, null, null, "'.'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, null, null, null, "LCURL", "RCURL", 
 		"LPAREN", "RPAREN", "EOF_", "NULL_", "NATURAL_NUMBER", "DESCRIPTION", 
 		"MULTILINESTRING", "IDENTIFIER", "STRING", "LINECOMMENT", "BLOCKCOMMENT", 
-		"WS", "DOT"
+		"EOLS", "WS", "DOT"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -1179,7 +1179,7 @@ public partial class TfVarsParser : Parser {
 	}
 
 	private static int[] _serializedATN = {
-		4,1,23,120,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
+		4,1,24,120,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
 		7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,
 		2,15,7,15,1,0,4,0,34,8,0,11,0,12,0,35,1,0,1,0,1,1,1,1,1,1,1,1,1,2,1,2,
 		1,3,1,3,1,3,1,3,1,3,3,3,51,8,3,1,4,1,4,1,4,3,4,56,8,4,1,5,1,5,1,5,1,5,
@@ -1211,7 +1211,7 @@ public partial class TfVarsParser : Parser {
 		0,98,99,5,1,0,0,99,100,3,6,3,0,100,19,1,0,0,0,101,102,7,0,0,0,102,21,1,
 		0,0,0,103,104,7,1,0,0,104,23,1,0,0,0,105,107,7,2,0,0,106,105,1,0,0,0,106,
 		107,1,0,0,0,107,108,1,0,0,0,108,109,3,26,13,0,109,25,1,0,0,0,110,113,5,
-		15,0,0,111,112,5,23,0,0,112,114,5,15,0,0,113,111,1,0,0,0,113,114,1,0,0,
+		15,0,0,111,112,5,24,0,0,112,114,5,15,0,0,113,111,1,0,0,0,113,114,1,0,0,
 		0,114,27,1,0,0,0,115,116,7,3,0,0,116,29,1,0,0,0,117,118,7,4,0,0,118,31,
 		1,0,0,0,11,35,50,55,63,75,79,81,88,92,106,113
 	};

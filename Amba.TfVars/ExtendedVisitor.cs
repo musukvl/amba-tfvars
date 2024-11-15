@@ -71,7 +71,11 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
     {
         var key = context.map_key().GetText();
         var value = Visit(context.expression());
+        var commentBefore = GetCommentsBeforeToken(context.Start);
         var result = new MapPairNode(key, (TfVarsNode)value);
+        var commentAfter = GetCommentsAfterToken(context.Stop);
+        
+        result.CommentBefore = commentBefore;
         return result;
     }
 
@@ -86,27 +90,49 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         return result;
     }
 
-    private string GetCommentsAfterToken(IToken token)
+    private string[] GetCommentsAfterToken(IToken token)
     {
         var comments = new List<string>();
+        if (token.TokenIndex == _tokenStream.Size - 1)
+        {
+            return comments.ToArray();
+        }
         var t = _tokenStream.Get(token.TokenIndex + 1);
 
-        if (t.Channel == Lexer.Hidden)
+        if (t.Channel == Lexer.Hidden && t.Type != TfVarsLexer.EOLS)
         {
             comments.Add(t.Text);
         }
-        return string.Join(", ", comments);
+        return comments.ToArray();
     }
 
-    private string GetCommentsBeforeToken(IToken token)
+    private string[] GetCommentsBeforeToken(IToken token)
     {
         var comments = new List<string>();
-        var t = _tokenStream.Get(token.TokenIndex - 1);
-
-        if (t.Channel == Lexer.Hidden)
+        if (token.TokenIndex == 0)
         {
-            comments.Add(t.Text);
+            return comments.ToArray();
         }
-        return string.Join(", ", comments);
+        
+        // go up from the current token to the beginning of the file to find comments
+        for (var i = token.TokenIndex - 1; i >= 0; i--)
+        {
+            var t = _tokenStream.Get(i);
+            if (t.Channel == Lexer.Hidden && t.Type != TfVarsLexer.EOLS)
+            {
+                comments.Add(t.Text);
+            }
+            else if (t.Type == TfVarsLexer.EOLS)
+            {
+                continue;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return comments.ToArray();
     }
+    
+    
 }
