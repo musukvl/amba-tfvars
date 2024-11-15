@@ -6,7 +6,7 @@ namespace Amba.TfVars.Model;
 
 public class ListNode : TfVarsNode
 {
-    public List<TfVarsNode> Values { get; set; } = new();
+    public List<TfVarsNode> Values { get; } = new();
 
     public ListNode()
     {
@@ -15,6 +15,11 @@ public class ListNode : TfVarsNode
     public ListNode(params TfVarsNode[] values)
     {
         Values.AddRange(values);
+    }
+
+    public override IEnumerable<TfVarsNode> Children()
+    {
+        return Values;
     }
 
     public override TfVarsNode? this[object key]

@@ -1,7 +1,7 @@
 using Amba.TfVars;
 using Amba.TfVars.Model;
 
-namespace Amba.TfVarsTests.ConstructorTests;
+namespace Amba.TfVarsTests.ModelTests;
 
 public class ConstructorTests
 {

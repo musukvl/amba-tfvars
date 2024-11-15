@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Amba.TfVars.Model;
 
-public abstract class TfVarsNode
+public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
 {
     /// <summary>
     /// Gets the <see cref="JToken"/> with the specified key.
@@ -14,6 +16,11 @@ public abstract class TfVarsNode
         set => throw new InvalidOperationException(@$"Cannot set child value on {GetType()}.");
     }
 
+    #region operators
+
+    
+
+    
 
     public static explicit operator bool(TfVarsNode value)
     {
@@ -50,7 +57,26 @@ public abstract class TfVarsNode
         }
         throw new InvalidCastException();
     }
+    
+    public static implicit operator TfVarsNode(string? value)
+    {
+        return new StringNode(value);
+    }
+    
+#endregion
 
+    public virtual IEnumerable<TfVarsNode> Children()
+    {
+        return Array.Empty<TfVarsNode>();
+    }
 
+    public virtual IEnumerator<TfVarsNode> GetEnumerator()
+    {
+        return Children().GetEnumerator();
+    }
 
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

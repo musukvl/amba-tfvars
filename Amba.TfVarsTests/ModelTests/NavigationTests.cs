@@ -1,6 +1,6 @@
 using Amba.TfVars;
 
-namespace Amba.TfVarsTests.ParserTests;
+namespace Amba.TfVarsTests.ModelTests;
 
 public class NavigationTests
 {

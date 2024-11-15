@@ -23,7 +23,7 @@ public class E2ETests
         var input = File.ReadAllText("./examples/" + inputFile);
         var expected = File.ReadAllText("./examples/" + expectedFile).Trim();
         var root = TfVarsContent.Parse(input);
-        
+
         var tfVarsStr = TfVarsContent.Serialize(root, identSize: 4).Trim();
         TestUtils.CompareLines(expected, tfVarsStr);
     }

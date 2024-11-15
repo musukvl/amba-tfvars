@@ -6,7 +6,7 @@ namespace Amba.TfVars;
 
 public static class TfVarsContent
 {
-    public static TfVarsNode? Parse(string input)
+    public static TfVarsRoot? Parse(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
         {
