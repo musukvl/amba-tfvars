@@ -1,6 +1,6 @@
 ﻿namespace Amba.TfVars.Model;
 
-public class NumberNode : TfVarsNode
+public class NumberNode : ValueNode
 {
     public decimal Value { get; set; }
 

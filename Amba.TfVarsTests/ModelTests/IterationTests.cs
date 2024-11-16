@@ -21,7 +21,7 @@ public class IterationTests
                                """;
         var parsed = TfVarsContent.Parse(varfile);
         var usersCount = 0;
- 
+
         foreach (var user in parsed["users"])
         {
             usersCount++;

@@ -18,9 +18,9 @@ public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
 
     #region operators
 
-    
 
-    
+
+
 
     public static explicit operator bool(TfVarsNode value)
     {
@@ -57,13 +57,13 @@ public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
         }
         throw new InvalidCastException();
     }
-    
+
     public static implicit operator TfVarsNode(string? value)
     {
         return new StringNode(value);
     }
-    
-#endregion
+
+    #endregion
 
     public virtual IEnumerable<TfVarsNode> Children()
     {

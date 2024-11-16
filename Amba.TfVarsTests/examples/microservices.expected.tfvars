@@ -8,7 +8,7 @@
             {
                 name = "auth-api-db"
                 type = "mysql"
-            },
+            }
         ]
     }
     email_sender = {
@@ -20,7 +20,7 @@
             {
                 name = "email-sender-db"
                 type = "mysql"
-            },
+            }
         ]
     }
     "ledger-api" = {
@@ -32,7 +32,7 @@
             {
                 name = "ledger-api-db"
                 type = "mysql"
-            },
+            }
         ]
     }
 }

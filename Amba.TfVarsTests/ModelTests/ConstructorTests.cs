@@ -41,7 +41,7 @@ public class ConstructorTests
                                 users = [
                                     {
                                         name = "Vasya"
-                                    },
+                                    }
                                 ]
                                 """;
         TestUtils.CompareLines(expected, serialized);

@@ -16,7 +16,7 @@ var tfvarsNodes = TfVarsContent.Deserialize("key = value");
 ### Serializing
 
 ```csharp
-var tfvarsString = TfVarsContent.Serialize(tfvarsNodes, indentSize: 4);
+var tfvarsString = TfVarsContent.Serialize(tfvarsNodes);
 ```
 
 ### Tree navigation
@@ -40,7 +40,6 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 ## Known limitations
 
-- The parser doesn't support comments.
 - The parser doesn't do any validation on the content of the tfvars file.
 - The serializer does code format which is not the same as `terraform fmt` does.
 - The parser doesn't support multiline strings done with <<EOF syntax.
@@ -50,6 +49,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
+| 1.3.0   | Support comments in for maps and variables.                                                        |
 | 1.2.0   | MapNode ordering extension. Can be used to use order for all objects.                              |
 | 1.1.2   | Add constructors for constructing tfvars configuration in c# code                                  |
 | 1.1.0   | Base class has index operator for all nodes of parsed tree. The same as JToken in Newtonsoft.Json. |

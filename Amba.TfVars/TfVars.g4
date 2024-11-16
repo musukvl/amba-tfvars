@@ -131,8 +131,12 @@ BLOCKCOMMENT
     : '/*' .*? '*/' -> channel(HIDDEN)
     ;
 
+EOLS
+    : [\r\n]+ -> channel(HIDDEN)
+    ;
+
 WS
-    : [ \r\n\t]+ -> skip
+    : [ \t]+ -> skip
     ;  
     
 DOT
