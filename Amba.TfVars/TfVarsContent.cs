@@ -79,9 +79,20 @@ internal class TfVarsSerializer
         _sb.AppendLine("{");
         foreach (var mapPair in mapNode.Values)
         {
+            foreach (var comment in mapPair.CommentsBefore)
+            {
+                AppendLineIdented(comment, depth);
+            }
+
             AppendIdented(mapPair.OriginalKey, depth);
             _sb.Append(" = ");
             Serialize(mapPair.Value, depth + 1);
+
+            foreach (var comment in mapPair.CommentsAfter)
+            {
+                _sb.Append(" ");
+                _sb.Append(comment);
+            }
             _sb.AppendLine();
         }
 

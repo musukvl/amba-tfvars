@@ -40,7 +40,7 @@ public class MapNodeExtensionsTests
             var node = (MapPairNode)tfVarsNode;
             ((MapNode)node.Value!).ReorderKeys("ip", "description", "dc");
         }
-        
+
         var serialized = TfVarsContent.Serialize(tree);
         var expected = """
                        vms = {
@@ -71,6 +71,6 @@ public class MapNodeExtensionsTests
                        """;
         TestUtils.CompareLines(expected, serialized);
     }
-    
+
 
 }

@@ -1,4 +1,6 @@
-﻿namespace Amba.TfVars.Model;
+﻿using System;
+
+namespace Amba.TfVars.Model;
 
 public class MapPairNode : TfVarsNode
 {
@@ -14,7 +16,7 @@ public class MapPairNode : TfVarsNode
         get => Value?[key];
         set
         {
-            if (Value != null) 
+            if (Value != null)
                 Value[key] = value;
         }
     }
@@ -22,5 +24,6 @@ public class MapPairNode : TfVarsNode
     public string Key { get; }
     public string OriginalKey { get; }
     public TfVarsNode? Value { get; set; }
-    public string[] CommentBefore { get; set; }
+    public string[] CommentsBefore { get; set; } = Array.Empty<string>();
+    public string[] CommentsAfter { get; set; } = Array.Empty<string>();
 }

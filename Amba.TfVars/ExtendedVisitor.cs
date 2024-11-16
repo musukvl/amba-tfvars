@@ -5,7 +5,7 @@ using Antlr4.Runtime;
 
 namespace Amba.TfVars;
 
-public class ExtendedVisitor : TfVarsBaseVisitor<object>
+public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
 {
     private readonly ITokenStream _tokenStream;
 
@@ -74,8 +74,9 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         var commentBefore = GetCommentsBeforeToken(context.Start);
         var result = new MapPairNode(key, (TfVarsNode)value);
         var commentAfter = GetCommentsAfterToken(context.Stop);
-        
-        result.CommentBefore = commentBefore;
+
+        result.CommentsBefore = commentBefore;
+        result.CommentsAfter = commentAfter;
         return result;
     }
 
@@ -90,49 +91,4 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         return result;
     }
 
-    private string[] GetCommentsAfterToken(IToken token)
-    {
-        var comments = new List<string>();
-        if (token.TokenIndex == _tokenStream.Size - 1)
-        {
-            return comments.ToArray();
-        }
-        var t = _tokenStream.Get(token.TokenIndex + 1);
-
-        if (t.Channel == Lexer.Hidden && t.Type == TfVarsLexer.LINECOMMENT)
-        {
-            comments.Add(t.Text);
-        }
-        return comments.ToArray();
-    }
-
-    private string[] GetCommentsBeforeToken(IToken token)
-    {
-        var comments = new List<string>();
-        if (token.TokenIndex == 0)
-        {
-            return comments.ToArray();
-        }
-        
-        // go up from the current token to the beginning of the file to find comments
-        for (var i = token.TokenIndex - 1; i >= 0; i--)
-        {
-            var t = _tokenStream.Get(i);
-            if (t.Channel == Lexer.Hidden && t.Type != TfVarsLexer.EOLS)
-            {
-                comments.Add(t.Text);
-            }
-            else if (t.Type == TfVarsLexer.EOLS)
-            {
-                continue;
-            }
-            else
-            {
-                break;
-            }
-        }
-        return comments.ToArray();
-    }
-    
-    
 }

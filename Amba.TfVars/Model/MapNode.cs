@@ -28,6 +28,11 @@ public class MapNode : TfVarsNode
         }
     }
 
+    public MapPairNode Children(string key)
+    {
+        return Values.FirstOrDefault(x => x.Key == key) ?? throw new ArgumentException($"Key {key} not found", nameof(key));
+    }
+
     public override IEnumerable<TfVarsNode> Children()
     {
         return Values;
@@ -57,7 +62,8 @@ public class MapNode : TfVarsNode
                     Values.AddLast(new MapPairNode(strKey, value));
                 }
             }
-            throw new ArgumentException("Key must be a string", nameof(key));
+            else
+                throw new ArgumentException("Key must be a string", nameof(key));
         }
     }
 }
