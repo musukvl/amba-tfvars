@@ -19,7 +19,7 @@ public class CommentsTests
                              """;
         var root = TfVarsContent.Parse(input);
         var user = (MapNode)root["user"]!;
-        var phone = user.Children("phone");
+        var phone = user.Child("phone");
         Assert.NotNull(phone as MapPairNode);
         Assert.Equal(2, phone.CommentsBefore.Length);
 
@@ -38,7 +38,7 @@ public class CommentsTests
 
         var varfile = TfVarsContent.Parse(input);
         var map = (MapNode)varfile["map"]!;
-        var key = map.Children("key1");
+        var key = map.Child("key1");
         Assert.Single(key.CommentsBefore);
     }
 
@@ -50,7 +50,7 @@ public class CommentsTests
                              variable = "value" # value comment
                              """;
         var varfile = TfVarsContent.Parse(input);
-        var variable = (VariableDefinitionNode)varfile.Children("variable")!;
+        var variable = varfile.Child("variable")!;
         Assert.Single(variable.CommentsBefore);
 
     }
@@ -64,10 +64,10 @@ public class CommentsTests
                              x = "test"
                              """;
         var varfile = TfVarsContent.Parse(input);
-        var variable = varfile.Children("variable")!;
+        var variable = varfile.Child("variable")!;
         Assert.Single(variable.CommentsBefore);
         Assert.NotNull(variable.Value.AsValue().CommentAfter);
-        var x = varfile.Children("x")!;
+        var x = varfile.Child("x")!;
         Assert.Empty(x.CommentsBefore);
     }
 
@@ -80,10 +80,10 @@ public class CommentsTests
                              x = "test" # value comment
                              """;
         var varfile = TfVarsContent.Parse(input);
-        var variable = varfile.Children("variable")!;
+        var variable = varfile.Child("variable")!;
         Assert.Single(variable.CommentsBefore);
 
-        var x = varfile.Children("x")!;
+        var x = varfile.Child("x")!;
         Assert.Empty(x.CommentsBefore);
     }
 }

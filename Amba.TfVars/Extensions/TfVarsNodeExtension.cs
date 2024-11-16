@@ -9,6 +9,11 @@ public static class TfVarsNodeExtension
         return node as ValueNode;
     }
     
+    public static MapNode? AsMap(this TfVarsNode? node)
+    {
+        return node as MapNode;
+    }
+    
     public static ListNode? AsList(this TfVarsNode? node)
     {
         return node as ListNode;

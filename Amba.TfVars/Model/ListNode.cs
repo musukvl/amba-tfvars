@@ -21,6 +21,11 @@ public class ListNode : TfVarsNode
     {
         return Values;
     }
+    
+    public TfVarsNode ChildAt(int index)
+    {
+        return Values[index];
+    }
 
     public override TfVarsNode? this[object key]
     {

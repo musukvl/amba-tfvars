@@ -40,7 +40,7 @@ public class TfVarsRoot : TfVarsNode
         }
     }
 
-    public VariableDefinitionNode? Children(string name)
+    public VariableDefinitionNode? Child(string name)
     {
         return Variables.GetValueOrDefault(name);
     }

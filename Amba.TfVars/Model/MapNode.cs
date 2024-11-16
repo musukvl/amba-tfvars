@@ -28,7 +28,7 @@ public class MapNode : TfVarsNode
         }
     }
 
-    public MapPairNode Children(string key)
+    public MapPairNode Child(string key)
     {
         return Values.FirstOrDefault(x => x.Key == key) ?? throw new ArgumentException($"Key {key} not found", nameof(key));
     }
