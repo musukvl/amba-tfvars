@@ -99,7 +99,7 @@ public class ExtendedVisitor : TfVarsBaseVisitor<object>
         }
         var t = _tokenStream.Get(token.TokenIndex + 1);
 
-        if (t.Channel == Lexer.Hidden && t.Type != TfVarsLexer.EOLS)
+        if (t.Channel == Lexer.Hidden && t.Type == TfVarsLexer.LINECOMMENT)
         {
             comments.Add(t.Text);
         }
