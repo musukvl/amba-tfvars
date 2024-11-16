@@ -2,6 +2,7 @@
 y = 1
 z = 1.01
 b = true
+# comment before map
 map = {
     # key1 comment
     "key1" = "value1" # value1 comment
@@ -13,6 +14,6 @@ map = {
     z = [
         1,
         2,
-        3,
+        3
     ]
 }

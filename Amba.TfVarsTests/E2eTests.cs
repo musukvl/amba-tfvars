@@ -12,7 +12,7 @@ public class E2ETests
         var expected = File.ReadAllText("./examples/" + expectedFile).Trim();
         var tree = TfVarsContent.Parse(input);
 
-        var tfVarsStr = TfVarsContent.Serialize(tree, identSize: 4).Trim();
+        var tfVarsStr = TfVarsContent.Serialize(tree).Trim();
         TestUtils.CompareLines(expected, tfVarsStr);
     }
 
@@ -24,7 +24,7 @@ public class E2ETests
         var expected = File.ReadAllText("./examples/" + expectedFile).Trim();
         var root = TfVarsContent.Parse(input);
 
-        var tfVarsStr = TfVarsContent.Serialize(root, identSize: 4).Trim();
+        var tfVarsStr = TfVarsContent.Serialize(root).Trim();
         TestUtils.CompareLines(expected, tfVarsStr);
     }
 

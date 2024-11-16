@@ -1,125 +1,42 @@
-﻿using System;
-using System.Globalization;
-using System.Text;
+﻿using System.Text;
 using Amba.TfVars.Model;
+using Amba.TfVars.Serializer;
+using Antlr4.Runtime;
 
 namespace Amba.TfVars;
 
-internal class TfVarsSerializer
+public static class TfVarsContent
 {
-    private readonly StringBuilder _sb;
-    private bool Ident { get; }
-    private readonly int _identSize;
-
-    public TfVarsSerializer(StringBuilder sb, bool ident, int identSize)
+    public static TfVarsRoot? Parse(string input)
     {
-        _sb = sb;
-        Ident = ident;
-        _identSize = identSize;
-    }
-
-    public void Serialize(object? node, int depth)
-    {
-        if (node is null)
+        if (string.IsNullOrWhiteSpace(input))
         {
-            _sb.Append("null");
-            return;
+            return null;
         }
-        switch (node)
+        var inputStream = new AntlrInputStream(input);
+        var lexer = new TfVarsLexer(inputStream);
+        var tokenStream = new CommonTokenStream(lexer);
+        var parser = new TfVarsParser(tokenStream);
+
+        var tree = parser.file_();
+        var visitor = new ExtendedVisitor(tokenStream);
+        var result = visitor.Visit(tree);
+        return result as TfVarsRoot;
+    }
+    
+    public static string Serialize(TfVarsNode? node, SerializerOptions? options = null)
+    {
+        if (node == null)
         {
-            case NumberNode numberNode:
-                _sb.Append(numberNode.Value.ToString(CultureInfo.InvariantCulture));
-                break;
-            case StringNode stringNode:
-                _sb.Append("\"");
-                _sb.Append(stringNode.Value);
-                _sb.Append("\"");
-                break;
-            case BoolNode boolNode:
-                _sb.Append(boolNode.Value ? "true" : "false");
-                break;
-            case ListNode listNode:
-                SerializeList(listNode, depth);
-                break;
-            case MapNode mapNode:
-                SerializeMap(mapNode, depth);
-                break;
-            case TfVarsRoot varsFileNode:
-                SerializeVarsFile(varsFileNode, depth);
-                break;
-            case VariableDefinitionNode variableDefinitionNode:
-                SerializeVaribleDefinition(variableDefinitionNode, depth);
-                break;
+            return string.Empty;
         }
 
-        if (node is ValueNode valueNode && !string.IsNullOrWhiteSpace(valueNode.CommentAfter))
-        {
-            _sb.Append(" ");
-            _sb.Append(valueNode.CommentAfter);
-        }
+        options ??= SerializerOptions.Default;
+        var sb = new StringBuilder();
+        var serializer = new TfVarsSerializer(sb, options);
+
+        serializer.Serialize(node, 0);
+        return sb.ToString();
     }
 
-    private void SerializeVaribleDefinition(VariableDefinitionNode variableDefinitionNode, int depth)
-    {
-        AppendIdented(variableDefinitionNode.Name, depth);
-        _sb.Append(" = ");
-        Serialize(variableDefinitionNode.Value, depth + 1);
-        _sb.AppendLine();
-    }
-
-    private void SerializeList(ListNode listNode, int depth)
-    {
-        _sb.AppendLine("[");
-        foreach (var value in listNode.Values)
-        {
-            AppendIdented("", depth);
-            Serialize(value, depth + 1);
-            _sb.AppendLine(",");
-        }
-
-        AppendIdented("]", depth - 1);
-    }
-
-    private void SerializeMap(MapNode mapNode, int depth)
-    {
-        _sb.AppendLine("{");
-        foreach (var mapPair in mapNode.Values)
-        {
-            foreach (var comment in mapPair.CommentsBefore)
-            {
-                AppendLineIdented(comment, depth);
-            }
-
-            AppendIdented(mapPair.OriginalKey, depth);
-            _sb.Append(" = ");
-            Serialize(mapPair.Value, depth + 1);
-            _sb.AppendLine();
-        }
-
-        AppendIdented("}", depth - 1);
-    }
-
-    private void SerializeVarsFile(TfVarsRoot tfVarsRoot, int depth)
-    {
-        foreach (var var in tfVarsRoot.Variables)
-        {
-            this.SerializeVaribleDefinition(var.Value, 0);
-        }
-    }
-
-    private void AppendLineIdented(string value, int depth)
-    {
-        AppendIdented(value, depth);
-        _sb.Append(Environment.NewLine);
-    }
-
-    private void AppendIdented(string value, int depth)
-    {
-        if (Ident)
-        {
-            _sb.Append(new string(' ', depth * 4));
-        }
-
-        _sb.Append(value);
-    }
 }

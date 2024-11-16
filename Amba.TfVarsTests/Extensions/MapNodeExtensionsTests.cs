@@ -51,7 +51,7 @@ public class MapNodeExtensionsTests
                                "owner" = "Jane Doe"
                                "labels" = [
                                    "dev",
-                                   "west",
+                                   "west"
                                ]
                            }
                            "test-vm" = {
