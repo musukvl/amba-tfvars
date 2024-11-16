@@ -5,6 +5,14 @@ This is a simple parser and serializer for Terraform `.tfvars` files into a tree
 The main purpose is to provide a way to process and transform `.tfvars` files.
 It is written in C# and it is based on the  [ANTLR4](https://www.antlr.org/) library.
 
+## Installation
+
+The [Amba.TfVars](https://www.nuget.org/packages/Amba.TfVars/1.3.0) package is available on NuGet.
+
+```bash
+dotnet add package Amba.TfVars
+``` 
+
 ## Usage
 
 ### Parsing
