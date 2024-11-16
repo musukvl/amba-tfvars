@@ -1,6 +1,6 @@
 ﻿namespace Amba.TfVars.Model;
 
-public class BoolNode : TfVarsNode
+public class BoolNode : ValueNode
 {
     public bool Value { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Amba.TfVars.Model;
 
-public class StringNode : TfVarsNode
+public class StringNode : ValueNode
 {
     public string Value { get; set; } = string.Empty;
 

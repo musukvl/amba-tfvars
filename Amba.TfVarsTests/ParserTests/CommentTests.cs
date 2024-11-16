@@ -1,4 +1,5 @@
 ﻿using Amba.TfVars;
+using Amba.TfVars.Extensions;
 using Amba.TfVars.Model;
 
 namespace Amba.TfVarsTests.ParserTests;
@@ -21,7 +22,7 @@ public class CommentsTests
         var phone = user.Children("phone");
         Assert.NotNull(phone as MapPairNode);
         Assert.Equal(2, phone.CommentsBefore.Length);
-        Assert.Single(phone.CommentsAfter);
+
     }
 
     [Fact]
@@ -39,7 +40,6 @@ public class CommentsTests
         var map = (MapNode)varfile["map"]!;
         var key = map.Children("key1");
         Assert.Single(key.CommentsBefore);
-        Assert.Single(key.CommentsAfter);
     }
 
     [Fact]
@@ -52,10 +52,9 @@ public class CommentsTests
         var varfile = TfVarsContent.Parse(input);
         var variable = (VariableDefinitionNode)varfile.Children("variable")!;
         Assert.Single(variable.CommentsBefore);
-        Assert.Single(variable.CommentsAfter);
 
     }
-    
+
     [Fact]
     public void TestVariableComments()
     {
@@ -67,13 +66,11 @@ public class CommentsTests
         var varfile = TfVarsContent.Parse(input);
         var variable = varfile.Children("variable")!;
         Assert.Single(variable.CommentsBefore);
-        Assert.Single(variable.CommentsAfter);
-        
+        Assert.NotNull(variable.Value.AsValue().CommentAfter);
         var x = varfile.Children("x")!;
         Assert.Empty(x.CommentsBefore);
-        Assert.Empty(x.CommentsAfter);
     }
-    
+
     [Fact]
     public void TestVariableAndMultilineComments()
     {
@@ -85,10 +82,8 @@ public class CommentsTests
         var varfile = TfVarsContent.Parse(input);
         var variable = varfile.Children("variable")!;
         Assert.Single(variable.CommentsBefore);
-        Assert.Single(variable.CommentsAfter);
-        
+
         var x = varfile.Children("x")!;
         Assert.Empty(x.CommentsBefore);
-        Assert.Single(x.CommentsAfter);
     }
 }

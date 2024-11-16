@@ -11,11 +11,11 @@ public partial class ExtendedVisitor
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    private string[] GetCommentsAfterToken(IToken token)
+    private string? GetCommentsAfterToken(IToken token)
     {
         if (token.TokenIndex == _tokenStream.Size - 1)
         {
-            return Array.Empty<string>();
+            return null;
         }
 
         var lookupPosition = token.TokenIndex + 1;
@@ -25,19 +25,18 @@ public partial class ExtendedVisitor
         {
             // check if lookupPosition in bounds
             if (lookupPosition == _tokenStream.Size - 1)
-                return Array.Empty<string>();
+                return null;
 
             // 
             lookupPosition += 1;
             t = _tokenStream.Get(lookupPosition);
         }
 
-        var comments = new List<string>();
         if (t.Channel == Lexer.Hidden && t.Type == TfVarsLexer.LINECOMMENT || t.Type == TfVarsLexer.BLOCKCOMMENT)
         {
-            comments.Add(t.Text);
+            return t.Text;
         }
-        return comments.ToArray();
+        return null;
     }
 
     /// <summary>

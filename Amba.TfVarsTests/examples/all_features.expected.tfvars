@@ -1,4 +1,4 @@
-﻿x = "test_str1"
+﻿x = "test_str1" # comment
 y = 1
 z = 1.01
 b = true

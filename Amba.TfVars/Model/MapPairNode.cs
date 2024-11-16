@@ -25,5 +25,4 @@ public class MapPairNode : TfVarsNode
     public string OriginalKey { get; }
     public TfVarsNode? Value { get; set; } = null;
     public string[] CommentsBefore { get; set; } = Array.Empty<string>();
-    public string[] CommentsAfter { get; set; } = Array.Empty<string>();
 }

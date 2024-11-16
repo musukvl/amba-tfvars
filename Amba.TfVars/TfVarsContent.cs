@@ -51,6 +51,12 @@ internal class TfVarsSerializer
                 SerializeVaribleDefinition(variableDefinitionNode, depth);
                 break;
         }
+
+        if (node is ValueNode valueNode && !string.IsNullOrWhiteSpace(valueNode.CommentAfter))
+        {
+            _sb.Append(" ");
+            _sb.Append(valueNode.CommentAfter);
+        }
     }
 
     private void SerializeVaribleDefinition(VariableDefinitionNode variableDefinitionNode, int depth)
@@ -87,12 +93,6 @@ internal class TfVarsSerializer
             AppendIdented(mapPair.OriginalKey, depth);
             _sb.Append(" = ");
             Serialize(mapPair.Value, depth + 1);
-
-            foreach (var comment in mapPair.CommentsAfter)
-            {
-                _sb.Append(" ");
-                _sb.Append(comment);
-            }
             _sb.AppendLine();
         }
 

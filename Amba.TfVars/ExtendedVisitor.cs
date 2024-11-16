@@ -28,36 +28,54 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
     public override object VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
     {
         var commentBefore = GetCommentsBeforeToken(context.Start);
-        var commentAfter = GetCommentsAfterToken(context.Stop);
         var value = (TfVarsNode)Visit(context.expression());
         var result = new VariableDefinitionNode(
             name: context.identifier().GetText(),
             value: value
         );
         result.CommentsBefore = commentBefore;
-        result.CommentsAfter = commentAfter;
         return result;
     }
 
     public override object VisitString(TfVarsParser.StringContext context)
     {
         var str = context.GetText();
-        return new StringNode(str[1..^1]);
+        var commentAfter = GetCommentsAfterToken(context.Stop);
+        var result = new StringNode(str[1..^1])
+        {
+            CommentAfter = commentAfter
+        };
+        return result;
     }
 
     public override object VisitBoolean(TfVarsParser.BooleanContext context)
     {
-        return new BoolNode(context.GetText().ToLower() == "true");
+        var commentAfter = GetCommentsAfterToken(context.Stop);
+        var result = new BoolNode(context.GetText().ToLower() == "true")
+        {
+            CommentAfter = commentAfter
+        };
+        return result;
     }
 
     public override object VisitNumber(TfVarsParser.NumberContext context)
     {
-        return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
+        var commentAfter = GetCommentsAfterToken(context.Stop);
+        var result = new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture))
+        {
+            CommentAfter = commentAfter
+        };
+        return result;
     }
 
     public override object VisitSigned_number(TfVarsParser.Signed_numberContext context)
     {
-        return new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture));
+        var commentAfter = GetCommentsAfterToken(context.Stop);
+        var result = new NumberNode(decimal.Parse(context.GetText(), CultureInfo.InvariantCulture))
+        {
+            CommentAfter = commentAfter
+        };
+        return result;
     }
 
     public override object VisitMap_(TfVarsParser.Map_Context context)
@@ -77,10 +95,7 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
         var value = Visit(context.expression());
         var commentBefore = GetCommentsBeforeToken(context.Start);
         var result = new MapPairNode(key, (TfVarsNode)value);
-        var commentAfter = GetCommentsAfterToken(context.Stop);
-
         result.CommentsBefore = commentBefore;
-        result.CommentsAfter = commentAfter;
         return result;
     }
 
