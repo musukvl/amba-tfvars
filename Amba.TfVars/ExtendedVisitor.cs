@@ -27,11 +27,15 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
 
     public override object VisitVariable_definition(TfVarsParser.Variable_definitionContext context)
     {
+        var commentBefore = GetCommentsBeforeToken(context.Start);
+        var commentAfter = GetCommentsAfterToken(context.Stop);
         var value = (TfVarsNode)Visit(context.expression());
         var result = new VariableDefinitionNode(
             name: context.identifier().GetText(),
             value: value
         );
+        result.CommentsBefore = commentBefore;
+        result.CommentsAfter = commentAfter;
         return result;
     }
 

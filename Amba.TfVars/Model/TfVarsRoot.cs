@@ -39,4 +39,9 @@ public class TfVarsRoot : TfVarsNode
             throw new ArgumentException("Key must be a string", nameof(key));
         }
     }
+
+    public VariableDefinitionNode? Children(string name)
+    {
+        return Variables.GetValueOrDefault(name);
+    }
 }

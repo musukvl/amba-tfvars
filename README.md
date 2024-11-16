@@ -50,7 +50,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
-| 1.3.0   | Support comments in for maps.                                                                      |
+| 1.3.0   | Support comments in for maps and variables.                                                        |
 | 1.2.0   | MapNode ordering extension. Can be used to use order for all objects.                              |
 | 1.1.2   | Add constructors for constructing tfvars configuration in c# code                                  |
 | 1.1.0   | Base class has index operator for all nodes of parsed tree. The same as JToken in Newtonsoft.Json. |
