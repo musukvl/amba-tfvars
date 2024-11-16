@@ -38,7 +38,8 @@ public class CommentsTests
 
         var varfile = TfVarsContent.Parse(input);
         var map = (MapNode)varfile["map"]!;
-        var submap = map.Children("key1");
-        Assert.NotNull(varfile);
+        var key = map.Children("key1");
+        Assert.Single(key.CommentsBefore);
+        Assert.Single(key.CommentsAfter);
     }
 }

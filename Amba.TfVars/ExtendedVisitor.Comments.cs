@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using Amba.TfVars.Model;
 using Antlr4.Runtime;
 
 namespace Amba.TfVars;
 
-public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
+public partial class ExtendedVisitor
 {
-
     /// <summary>
     /// Get comments after the token. It could be comma after token. Captures comment before EOL. 
     /// </summary>
@@ -43,6 +40,11 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
         return comments.ToArray();
     }
 
+    /// <summary>
+    /// Get comments before the token. But it shouldn't be a one line comment after previous token.
+    /// </summary>
+    /// <param name="startToken"></param>
+    /// <returns></returns>
     private string[] GetCommentsBeforeToken(IToken startToken)
     {
         var comments = new List<string>();
