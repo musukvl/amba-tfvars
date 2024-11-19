@@ -78,36 +78,6 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
         return result;
     }
 
-    public override object VisitMap_(TfVarsParser.Map_Context context)
-    {
-        var result = new MapNode();
-        foreach (var mapPair in context.map_pair())
-        {
-            var pair = (MapPairNode)Visit(mapPair);
-            result.Values.AddLast(pair);
-        }
-        return result;
-    }
 
-    public override object VisitMap_pair(TfVarsParser.Map_pairContext context)
-    {
-        var key = context.map_key().GetText();
-        var value = Visit(context.expression());
-        var commentBefore = GetCommentsBeforeToken(context.Start);
-        var result = new MapPairNode(key, (TfVarsNode)value);
-        result.CommentsBefore = commentBefore;
-        return result;
-    }
-
-    public override object VisitList_(TfVarsParser.List_Context context)
-    {
-        var result = new ListNode();
-
-        foreach (var expression in context.expression())
-        {
-            result.Values.Add((TfVarsNode)Visit(expression));
-        }
-        return result;
-    }
 
 }

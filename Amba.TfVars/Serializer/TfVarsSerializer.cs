@@ -5,7 +5,7 @@ using Amba.TfVars.Model;
 
 namespace Amba.TfVars.Serializer;
 
-internal class TfVarsSerializer
+internal partial class TfVarsSerializer
 {
     private readonly StringBuilder _sb;
     private readonly SerializerOptions _options;
@@ -14,7 +14,7 @@ internal class TfVarsSerializer
     {
         _sb = sb;
         _options = options;
-    } 
+    }
 
     public void Serialize(object? node, int depth)
     {
@@ -66,39 +66,6 @@ internal class TfVarsSerializer
         _sb.AppendLine();
     }
 
-    private void SerializeList(ListNode listNode, int depth)
-    {
-        _sb.AppendLine("[");
-        for (var index = 0; index < listNode.Values.Count; index++)
-        {
-            var value = listNode.Values[index];
-            AppendIdented("", depth);
-            Serialize(value, depth + 1);
-            if (!_options.IncludeListTrailingComma && index < listNode.Values.Count - 1)
-                _sb.AppendLine(",");
-            else
-                _sb.AppendLine();
-        }
-
-        AppendIdented("]", depth - 1);
-    }
-
-    private void SerializeMap(MapNode mapNode, int depth)
-    {
-        _sb.AppendLine("{");
-        foreach (var mapPair in mapNode.Values)
-        {
-            AppendLineIdented(mapPair.CommentsBefore, depth);
-
-            AppendIdented(mapPair.OriginalKey, depth);
-            _sb.Append(" = ");
-            Serialize(mapPair.Value, depth + 1);
-            _sb.AppendLine();
-        }
-
-        AppendIdented("}", depth - 1);
-    }
-
     private void SerializeVarsFile(TfVarsRoot tfVarsRoot, int depth)
     {
         foreach (var var in tfVarsRoot.Variables)
@@ -107,12 +74,13 @@ internal class TfVarsSerializer
         }
     }
 
+    //TODO: Make append methods as extension methods for string builder
     private void AppendLineIdented(string value, int depth)
     {
         AppendIdented(value, depth);
         _sb.Append(Environment.NewLine);
     }
-    
+
     private void AppendLineIdented(string[] values, int depth)
     {
         foreach (var value in values)

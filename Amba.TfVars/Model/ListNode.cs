@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Amba.TfVars.Model;
 
-public class ListNode : TfVarsNode
+public class ListNode : CollectionNode
 {
     public List<TfVarsNode> Values { get; } = new();
 
@@ -21,7 +21,7 @@ public class ListNode : TfVarsNode
     {
         return Values;
     }
-    
+
     public TfVarsNode ChildAt(int index)
     {
         return Values[index];

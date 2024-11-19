@@ -4,9 +4,11 @@ using System.Linq;
 
 namespace Amba.TfVars.Model;
 
-public class MapNode : TfVarsNode
+public class MapNode : CollectionNode
 {
     public LinkedList<MapPairNode> Values { get; } = new();
+
+
 
     public MapNode()
     {
