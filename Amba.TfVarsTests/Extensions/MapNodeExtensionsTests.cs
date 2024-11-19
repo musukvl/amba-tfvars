@@ -49,10 +49,7 @@ public class MapNodeExtensionsTests
                                description = "This is a dev VM"
                                "dc" = "west"
                                "owner" = "Jane Doe"
-                               "labels" = [
-                                   "dev",
-                                   "west"
-                               ]
+                               "labels" = ["dev", "west"]
                            }
                            "test-vm" = {
                                "ip" = "192.168.1.10"

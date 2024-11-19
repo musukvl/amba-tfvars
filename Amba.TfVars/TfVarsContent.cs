@@ -23,7 +23,7 @@ public static class TfVarsContent
         var result = visitor.Visit(tree);
         return result as TfVarsRoot;
     }
-    
+
     public static string Serialize(TfVarsNode? node, SerializerOptions? options = null)
     {
         if (node == null)

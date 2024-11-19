@@ -24,11 +24,11 @@ public class NavigationTests
                                }
                             ]
                            """;
-    
+
     [Fact(DisplayName = "Navigation by value structure. Acts as tree of dictionaries and lists.")]
     public void CheckNavigation()
     {
-        
+
         var parsed = TfVarsContent.Parse(Varfile);
         Assert.Equal(25, (int)parsed["users"][1]["meta"]["age"]);
     }
