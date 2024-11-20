@@ -24,7 +24,7 @@ section
     ;
 
 val
-    : NULL_
+    : null
     | signed_number
     | string
     | boolean
@@ -86,7 +86,7 @@ EOF_
     : '<<EOF' .*? 'EOF'
     ;
 
-NULL_
+null
     : 'null'
     ;
 

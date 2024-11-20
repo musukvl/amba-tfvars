@@ -111,6 +111,12 @@ public interface ITfVarsVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitSigned_number([NotNull] TfVarsParser.Signed_numberContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="TfVarsParser.null"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNull([NotNull] TfVarsParser.NullContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="TfVarsParser.number"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

@@ -18,11 +18,6 @@ internal partial class TfVarsSerializer
 
     public void Serialize(object? node, int depth)
     {
-        if (node is null)
-        {
-            _sb.Append("null");
-            return;
-        }
         switch (node)
         {
             case NumberNode numberNode:
@@ -48,11 +43,15 @@ internal partial class TfVarsSerializer
             case VariableDefinitionNode variableDefinitionNode:
                 SerializeVaribleDefinition(variableDefinitionNode, depth);
                 break;
+            case NullNode nullNode:
+                SerializeNullNode(nullNode, depth);
+                break;
         }
 
         if (node is ValueNode valueNode && !string.IsNullOrWhiteSpace(valueNode.CommentAfter))
         {
             _sb.Append(" ");
+            //TODO: Check comment after in case of list
             _sb.Append(valueNode.CommentAfter);
         }
     }
@@ -97,5 +96,10 @@ internal partial class TfVarsSerializer
             _sb.Append(new string(' ', depth * _options.IndentSize));
         }
         _sb.Append(value);
+    }
+
+    private void SerializeNullNode(NullNode nullNode, int depth)
+    {
+        _sb.Append("null");
     }
 }

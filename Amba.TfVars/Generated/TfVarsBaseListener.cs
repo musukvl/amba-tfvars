@@ -193,6 +193,18 @@ public partial class TfVarsBaseListener : ITfVarsListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSigned_number([NotNull] TfVarsParser.Signed_numberContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TfVarsParser.null"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNull([NotNull] TfVarsParser.NullContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TfVarsParser.null"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNull([NotNull] TfVarsParser.NullContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TfVarsParser.number"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
