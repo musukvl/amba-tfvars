@@ -37,6 +37,11 @@ public class MapNode : CollectionNode
     {
         return Values;
     }
+    
+    public IEnumerable<MapPairNode> Pairs()
+    {
+        return Values;
+    }
 
     public override TfVarsNode? this[object key]
     {

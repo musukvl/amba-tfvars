@@ -57,6 +57,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
+| 1.5.1   | Add terraform formatting for some cases.                                                           |
 | 1.5.0   | Add NullNode to handle comments after.                                                             |
 | 1.4.0   | Add OneLine boolean property to determine if map or list is declared one -line expression.         |
 | 1.3.0   | Support comments in for maps and variables.                                                        |

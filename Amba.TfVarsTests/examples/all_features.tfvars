@@ -1,4 +1,4 @@
-﻿
+
 
 x = "test_str1" # comment
 y = 1
@@ -8,10 +8,10 @@ b = true
 map = {
   # key1 comment
   "key1" = "value1", # value1 comment
-  key2 = "value2"
-  email = null # set an email after  
+  key2   = "value2"
+  email  = null # set an email after  
   submap = {
-    x = 11
+    x   = 11
     "y" = 12
   }
 
