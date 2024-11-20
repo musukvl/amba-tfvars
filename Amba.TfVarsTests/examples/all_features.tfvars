@@ -9,6 +9,7 @@ map = {
   # key1 comment
   "key1" = "value1", # value1 comment
   key2 = "value2"
+  email = null # set an email after  
   submap = {
     x = 11
     "y" = 12

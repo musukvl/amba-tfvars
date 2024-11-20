@@ -162,6 +162,16 @@ public interface ITfVarsListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitSigned_number([NotNull] TfVarsParser.Signed_numberContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TfVarsParser.null"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNull([NotNull] TfVarsParser.NullContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TfVarsParser.null"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNull([NotNull] TfVarsParser.NullContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TfVarsParser.number"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

@@ -78,6 +78,13 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
         return result;
     }
 
-
-
+    public override object VisitNull(TfVarsParser.NullContext context)
+    {
+        var commentAfter = GetCommentsAfterToken(context.Stop);
+        var result = new NullNode()
+        {
+            CommentAfter = commentAfter
+        };
+        return result;
+    }
 }

@@ -8,8 +8,6 @@ public class MapNode : CollectionNode
 {
     public LinkedList<MapPairNode> Values { get; } = new();
 
-
-
     public MapNode()
     {
     }
