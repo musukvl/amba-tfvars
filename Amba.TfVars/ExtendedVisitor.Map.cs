@@ -12,7 +12,7 @@ public partial class ExtendedVisitor
         foreach (var mapPair in context.map_pair())
         {
             var pair = (MapPairNode)Visit(mapPair);
-            result.Values.AddLast(pair);
+            result.Pairs.AddLast(pair);
         }
         result.OneLine = IsOneLine(context.Start, context.Stop);
         return result;
@@ -23,8 +23,10 @@ public partial class ExtendedVisitor
         var key = context.map_key().GetText();
         var value = Visit(context.expression());
         var commentBefore = GetCommentsBeforeToken(context.Start);
-        var result = new MapPairNode(key, (TfVarsNode)value);
-        result.CommentsBefore = commentBefore;
+        var result = new MapPairNode(key, (TfVarsNode)value)
+        {
+            CommentsBefore = commentBefore
+        };
         return result;
     }
 }

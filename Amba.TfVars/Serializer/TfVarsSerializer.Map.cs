@@ -3,7 +3,7 @@ using Amba.TfVars.Model;
 
 namespace Amba.TfVars.Serializer;
 
-//TODO: Move TfVarsSerializer to a separate class
+//TODO: Move ListSerializer to a separate class
 partial class TfVarsSerializer
 {
     private void SerializeMap(MapNode mapNode, int depth)
@@ -20,10 +20,12 @@ partial class TfVarsSerializer
 
     private void SerializeMapMultiLine(MapNode mapNode, int depth)
     {
-        var maxKeyLength = mapNode.Values.Max(x => x.OriginalKey.Length);
-        var doFormatting = DoMapFormatting(mapNode);
         _sb.AppendLine("{");
-        foreach (var mapPair in mapNode.Values)
+        
+        var doFormatting = DoMapFormatting(mapNode);
+        var maxKeyLength = mapNode.Pairs.Any() ? mapNode.Pairs.Max(x => x.OriginalKey.Length) : 0;
+        
+        foreach (var mapPair in mapNode.Pairs)
         {
             AppendLineIdented(mapPair.CommentsBefore, depth);
             AppendIdented(mapPair.OriginalKey, depth);
@@ -45,7 +47,7 @@ partial class TfVarsSerializer
 
     private static bool DoMapFormatting(MapNode mapNode)
     {
-        foreach (var mapPair in mapNode.Values)
+        foreach (var mapPair in mapNode.Pairs)
         {
             switch (mapPair.Value)
             {
@@ -59,12 +61,24 @@ partial class TfVarsSerializer
 
     private void SerializeOneLineMap(MapNode mapNode, int depth)
     {
-        _sb.Append("{ ");
-        foreach (var mapPair in mapNode.Values)
+        _sb.Append("{");
+        var values = mapNode.Pairs.ToArray();
+        for (var i = 0; i < values.Length; i++)
         {
+            var mapPair = values[i]; 
+            _sb.Append(" ");
+            
             _sb.Append(mapPair.OriginalKey);
             _sb.Append(" = ");
             Serialize(mapPair.Value, depth + 1);
+            if (i < values.Length - 1)
+            {
+                _sb.Append(",");
+            }
+            else
+            {
+                _sb.Append(" ");
+            }
         }
         _sb.Append("}");
     }
