@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Amba.TfVars.Model;
 
 namespace Amba.TfVars.Extensions;
@@ -14,15 +15,39 @@ public static class MapNodeExtensions
     {
         foreach (var key in keysOrder.Reverse())
         {
-            foreach (var node in mapNode.Values)
+            foreach (var node in mapNode.Pairs)
             {
                 if (node.Key == key)
                 {
-                    mapNode.Values.Remove(node);
-                    mapNode.Values.AddFirst(node);
+                    mapNode.Pairs.Remove(node);
+                    mapNode.Pairs.AddFirst(node);
                     break;
                 }
             }
         }
     }
+    
+    public static MapNode? ChildMap(this MapNode mapNode, string key)
+    {
+        var node = mapNode.Pairs.FirstOrDefault(x => x.Key == key);
+        return node?.Value.AsMap();
+    }
+    
+    public static IEnumerable<MapNode> ChildMaps(this MapNode mapNode)
+    {
+        foreach (var mapPair in mapNode.Pairs)
+        {
+            yield return mapPair.Value.AsMap()!;
+        }
+    }
+    
+    public static IEnumerable<TfVarsNode?> Values(this MapNode mapNode)
+    {
+        foreach (var mapPair in mapNode.Pairs)
+        {
+            yield return mapPair.Value;
+        }
+    }
+    
+    
 }

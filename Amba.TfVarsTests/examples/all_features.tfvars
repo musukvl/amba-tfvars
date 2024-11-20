@@ -14,7 +14,9 @@ map = {
     x   = 11
     "y" = 12
   }
-
+  empty_map = {}
+  empty_list = []
+  one_line_map = {"key" = "value", key2 = "value2"}
   z = [1, 2, 3]
 }
 
