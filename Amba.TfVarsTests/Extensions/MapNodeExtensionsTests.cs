@@ -45,24 +45,24 @@ public class MapNodeExtensionsTests
         var expected = """
                        vms = {
                            "dev_vm" = {
-                               "ip" = "192.168.1.12"
+                               "ip"        = "192.168.1.12"
                                description = "This is a dev VM"
-                               "dc" = "west"
-                               "owner" = "Jane Doe"
-                               "labels" = ["dev", "west"]
+                               "dc"        = "west"
+                               "owner"     = "Jane Doe"
+                               "labels"    = ["dev", "west"]
                            }
                            "test-vm" = {
-                               "ip" = "192.168.1.10"
-                               "dc" = "east"
+                               "ip"         = "192.168.1.10"
+                               "dc"         = "east"
                                oncall_email = "oncall@gmail.com"
-                               "owner" = "John Doe"
+                               "owner"      = "John Doe"
                            }
                            "prod_vm" = {
-                               "ip" = "192.168.1.11"
-                               description = "This is a prod VM"
-                               "dc" = "west"
+                               "ip"         = "192.168.1.11"
+                               description  = "This is a prod VM"
+                               "dc"         = "west"
                                oncall_email = "oncall@gmail.com"
-                               "owner" = "Jane Doe"
+                               "owner"      = "Jane Doe"
                            }
                        }
                        """;
