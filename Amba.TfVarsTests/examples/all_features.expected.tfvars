@@ -14,6 +14,6 @@ map = {
   }
   empty_map = {}
   empty_list = []
-  one_line_map = { "key" = "value", key2 = "value2" }
-  z = [1, 2, 3]
+  one_line_map = { "key" = "value", key2 = "value2" } # one line map
+  z = [1, 2, 3] # one line list
 }

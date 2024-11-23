@@ -10,5 +10,6 @@ public abstract class CollectionNode : TfVarsNode
     /// ```
     /// </summary>
     public bool OneLine { get; set; } = false;
+    public string? CommentsAfter { get; set; } = null;
 
 }

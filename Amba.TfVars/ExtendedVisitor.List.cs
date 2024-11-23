@@ -13,6 +13,10 @@ public partial class ExtendedVisitor
             result.Values.Add((TfVarsNode)Visit(expression));
         }
         result.OneLine = IsOneLine(context.Start, context.Stop);
+        if (result.OneLine)
+        {
+            result.CommentsAfter = GetCommentsAfterToken(context.Stop);
+        }
         return result;
     }
 }

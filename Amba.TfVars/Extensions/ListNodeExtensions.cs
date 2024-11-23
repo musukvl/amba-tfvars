@@ -11,7 +11,7 @@ public static class ListNodeExtensions
         var node = mapNode.Values.ElementAtOrDefault(index);
         return node?.AsMap();
     }
-    
+
     public static IEnumerable<MapNode> ChildMaps(this ListNode mapNode)
     {
         foreach (var mapPair in mapNode.Values)
@@ -19,7 +19,7 @@ public static class ListNodeExtensions
             yield return mapPair.AsMap()!;
         }
     }
-    
+
     public static IEnumerable<StringNode> ChildStrings(this ListNode mapNode)
     {
         foreach (var mapPair in mapNode.Values)

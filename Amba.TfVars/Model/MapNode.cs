@@ -19,7 +19,7 @@ public class MapNode : CollectionNode
             Pairs.AddLast(new MapPairNode(key, value));
         }
     }
-    
+
     public MapPairNode Child(string key)
     {
         return Pairs.FirstOrDefault(x => x.Key == key) ?? throw new ArgumentException($"Key {key} not found", nameof(key));

@@ -15,6 +15,10 @@ public partial class ExtendedVisitor
             result.Pairs.AddLast(pair);
         }
         result.OneLine = IsOneLine(context.Start, context.Stop);
+        if (result.OneLine)
+        {
+            result.CommentsAfter = GetCommentsAfterToken(context.Stop);
+        }
         return result;
     }
 

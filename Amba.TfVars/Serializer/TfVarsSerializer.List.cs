@@ -47,5 +47,11 @@ partial class TfVarsSerializer
         }
 
         _sb.Append("]");
+
+        if (listNode.CommentsAfter != null)
+        {
+            _sb.Append(" ");
+            _sb.Append(listNode.CommentsAfter);
+        }
     }
 }

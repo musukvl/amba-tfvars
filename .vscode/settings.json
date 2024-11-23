@@ -1,0 +1,20 @@
+{
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "properties",
+        "Log"
+    ],
+    "spellright.parserByClass": {
+        "properties": {
+            "parser": "markdown"
+        },
+        "Log": {
+            "parser": "plain"
+        }
+    }
+}
