@@ -26,13 +26,13 @@ public static class MapNodeExtensions
             }
         }
     }
-    
+
     public static MapNode? ChildMap(this MapNode mapNode, string key)
     {
         var node = mapNode.Pairs.FirstOrDefault(x => x.Key == key);
         return node?.Value.AsMap();
     }
-    
+
     public static IEnumerable<MapNode> ChildMaps(this MapNode mapNode)
     {
         foreach (var mapPair in mapNode.Pairs)
@@ -40,7 +40,7 @@ public static class MapNodeExtensions
             yield return mapPair.Value.AsMap()!;
         }
     }
-    
+
     public static IEnumerable<TfVarsNode?> Values(this MapNode mapNode)
     {
         foreach (var mapPair in mapNode.Pairs)
@@ -48,6 +48,6 @@ public static class MapNodeExtensions
             yield return mapPair.Value;
         }
     }
-    
-    
+
+
 }

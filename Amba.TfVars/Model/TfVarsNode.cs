@@ -6,10 +6,6 @@ namespace Amba.TfVars.Model;
 
 public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
 {
-    /// <summary>
-    /// Gets the <see cref="JToken"/> with the specified key.
-    /// </summary>
-    /// <value>The <see cref="JToken"/> with the specified key.</value>
     public virtual TfVarsNode? this[object key]
     {
         get => throw new InvalidOperationException(@$"Cannot access child value on {GetType()}.");
@@ -17,11 +13,7 @@ public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
     }
 
     #region operators
-
-
-
-
-
+    
     public static explicit operator bool(TfVarsNode value)
     {
         if (value is BoolNode boolNode)
@@ -58,7 +50,7 @@ public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
         throw new InvalidCastException();
     }
 
-    public static implicit operator TfVarsNode(string? value)
+    public static implicit operator TfVarsNode(string value)
     {
         return new StringNode(value);
     }

@@ -11,7 +11,7 @@ public class MapPairNode : TfVarsNode
         Value = value;
     }
 
-    public override TfVarsNode this[object key]
+    public override TfVarsNode? this[object key]
     {
         get => Value[key];
         set => Value[key] = value;
