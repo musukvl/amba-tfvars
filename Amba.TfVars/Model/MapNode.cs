@@ -12,7 +12,7 @@ public class MapNode : CollectionNode
     {
     }
 
-    public MapNode(Dictionary<string, TfVarsNode> pairs)
+    public MapNode(Dictionary<string, TfVarsNode> pairs, bool oneLine = false) 
     {
         foreach (var (key, value) in pairs)
         {

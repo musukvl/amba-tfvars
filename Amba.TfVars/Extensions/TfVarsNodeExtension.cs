@@ -1,15 +1,17 @@
-﻿using Amba.TfVars.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Amba.TfVars.Model;
 
 namespace Amba.TfVars.Extensions;
 
 public static class TfVarsNodeExtension
 {
-    public static ValueNode? AsValue(this TfVarsNode? node)
+    public static ValueNode? AsValueNode(this TfVarsNode? node)
     {
         return node as ValueNode;
     }
 
-    public static MapNode? AsMap(this TfVarsNode? node)
+    public static MapNode? AsMapNode(this TfVarsNode? node)
     {
         if (node is NullNode)
         {
@@ -17,8 +19,8 @@ public static class TfVarsNodeExtension
         }
         return node as MapNode;
     }
-
-    public static ListNode? AsList(this TfVarsNode? node)
+    
+    public static ListNode? AsListNode(this TfVarsNode? node)
     {
         if (node is NullNode)
         {
@@ -27,7 +29,7 @@ public static class TfVarsNodeExtension
         return node as ListNode;
     }
 
-    public static BoolNode? AsBool(this TfVarsNode? node)
+    public static BoolNode? AsBoolNode(this TfVarsNode? node)
     {
         if (node is NullNode)
         {
@@ -35,8 +37,8 @@ public static class TfVarsNodeExtension
         }
         return node as BoolNode;
     }
-
-    public static StringNode? AsString(this TfVarsNode? node)
+    
+    public static StringNode? AsStringNode(this TfVarsNode? node)
     {
         if (node is NullNode)
         {
@@ -45,7 +47,7 @@ public static class TfVarsNodeExtension
         return node as StringNode;
     }
 
-    public static NumberNode? AsNumber(this TfVarsNode? node)
+    public static NumberNode? AsNumberNode(this TfVarsNode? node)
     {
         if (node is NullNode)
         {
@@ -53,4 +55,6 @@ public static class TfVarsNodeExtension
         }
         return node as NumberNode;
     }
+    
+    
 }
