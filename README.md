@@ -57,7 +57,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
-| 1.6.0   | Improve tree navigation methods.                                                                   |
+| 1.6.1   | Improve tree navigation methods.                                                                   |
 | 1.5.3   | Support comment for one-line maps and lists.                                                       |
 | 1.5.2   | Fix serializer issue                                                                               |
 | 1.5.1   | Add terraform formatting for some cases.                                                           |

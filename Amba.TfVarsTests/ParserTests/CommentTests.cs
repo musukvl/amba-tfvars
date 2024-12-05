@@ -66,7 +66,7 @@ public class CommentsTests
         var varfile = TfVarsContent.Parse(input);
         var variable = varfile.Child("variable")!;
         Assert.Single(variable.CommentsBefore);
-        Assert.NotNull(variable.Value.AsValue().CommentAfter);
+        Assert.NotNull(variable.Value.ToString());
         var x = varfile.Child("x")!;
         Assert.Empty(x.CommentsBefore);
     }

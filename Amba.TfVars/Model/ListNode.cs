@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Amba.TfVars.Model;
 
-public class ListNode : CollectionNode
+public class ListNode : CollectionNode, IList<TfVarsNode>
 {
     public List<TfVarsNode> Values { get; } = new();
 
@@ -54,4 +53,57 @@ public class ListNode : CollectionNode
             Values[intKey] = value ?? throw new ArgumentNullException(nameof(value), "List element can't be null");
         }
     }
+
+
+    #region IList<TfVarsNode> Implementation
+    public int Count => Values.Count;
+
+    public bool IsReadOnly => false;
+
+    public void Add(TfVarsNode item)
+    {
+        Values.Add(item);
+    }
+
+    public void Clear()
+    {
+        Values.Clear();
+    }
+
+    public bool Contains(TfVarsNode item)
+    {
+        return Values.Contains(item);
+    }
+
+    public void CopyTo(TfVarsNode[] array, int arrayIndex)
+    {
+        Values.CopyTo(array, arrayIndex);
+    }
+
+    public int IndexOf(TfVarsNode item)
+    {
+        return Values.IndexOf(item);
+    }
+
+    public void Insert(int index, TfVarsNode item)
+    {
+        Values.Insert(index, item);
+    }
+
+    public bool Remove(TfVarsNode item)
+    {
+        return Values.Remove(item);
+    }
+
+    public void RemoveAt(int index)
+    {
+        Values.RemoveAt(index);
+    }
+
+    public new TfVarsNode this[int index]
+    {
+        get => Values[index];
+        set => Values[index] = value ?? throw new ArgumentNullException(nameof(value));
+    }
+    #endregion
 }

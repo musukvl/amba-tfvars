@@ -12,7 +12,7 @@ public class NullTests
 
         var parsed = TfVarsContent.Parse(varfile);
         var value = parsed?["email"];
-        Assert.Equal("x@x.com", value.AsString().Value);
+        Assert.Equal("x@x.com", value.AsString());
     }
 
     [Fact]

@@ -36,4 +36,13 @@ public static class ValueExtensions
         }
         return (node as StringNode)?.Value;
     }
+    
+    public static decimal AsDecimal(this TfVarsNode? node)
+    {
+        if (node is NullNode)
+        {
+            return 0;
+        }
+        return (node as NumberNode)?.Value ?? 0;
+    }
 }

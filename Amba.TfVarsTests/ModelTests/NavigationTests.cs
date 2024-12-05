@@ -28,7 +28,6 @@ public class NavigationTests
     [Fact(DisplayName = "Navigation by value structure. Acts as tree of dictionaries and lists.")]
     public void CheckNavigation()
     {
-
         var parsed = TfVarsContent.Parse(Varfile);
         Assert.Equal(25, (int)parsed["users"][1]["meta"]["age"]);
     }
@@ -39,10 +38,10 @@ public class NavigationTests
         var root = TfVarsContent.Parse(Varfile);
         var age = root
             .Child("users").Value
-            .AsList().ChildAt(1)
-            .AsMap().Child("meta").Value
-            .AsMap().Child("age").Value
-            .AsNumber().Value;
+            .AsListNode().ChildAt(1)
+            .AsMapNode().Child("meta").Value
+            .AsMapNode().Child("age").Value
+            .AsNumberNode().Value;
         Assert.Equal(25, age);
     }
 }
