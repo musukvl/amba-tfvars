@@ -9,14 +9,14 @@ public static class ListNodeExtensions
     public static MapNode? ChildMap(this ListNode mapNode, int index)
     {
         var node = mapNode.Values.ElementAtOrDefault(index);
-        return node?.AsMap();
+        return node?.AsMapNode();
     }
 
     public static IEnumerable<MapNode> ChildMaps(this ListNode mapNode)
     {
         foreach (var mapPair in mapNode.Values)
         {
-            yield return mapPair.AsMap()!;
+            yield return mapPair.AsMapNode()!;
         }
     }
 
@@ -24,7 +24,7 @@ public static class ListNodeExtensions
     {
         foreach (var mapPair in mapNode.Values)
         {
-            yield return mapPair.AsString()!;
+            yield return mapPair.AsStringNode()!;
         }
     }
 }

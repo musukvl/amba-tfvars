@@ -8,8 +8,9 @@ public class ListNode : CollectionNode
 {
     public List<TfVarsNode> Values { get; } = new();
 
-    public ListNode()
+    public ListNode(bool oneLine = false)
     {
+        OneLine = oneLine;
     }
 
     public ListNode(params TfVarsNode[] values)
@@ -17,6 +18,12 @@ public class ListNode : CollectionNode
         Values.AddRange(values);
     }
 
+    public ListNode(List<TfVarsNode> values, bool oneLine = false)
+        : this(oneLine)
+    {
+        Values.AddRange(values);
+    }
+    
     public override IEnumerable<TfVarsNode> Children()
     {
         return Values;

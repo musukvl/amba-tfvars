@@ -12,4 +12,13 @@ public abstract class CollectionNode : TfVarsNode
     public bool OneLine { get; set; } = false;
     public string? CommentsAfter { get; set; } = null;
 
+    public CollectionNode()
+    {
+    }
+    
+    public CollectionNode(bool oneLine)
+    {
+        OneLine = oneLine;
+    }
+
 }
