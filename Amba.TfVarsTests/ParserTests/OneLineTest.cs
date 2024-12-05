@@ -14,7 +14,7 @@ public class OneLineTest
                              address = {{ street = ""123 Main St."", city = ""Springfield"" }}
                              """;
         var root = TfVarsContent.Parse(input);
-        var addressMap = root.Child("address").Value.AsMap();
+        var addressMap = root.Child("address").Value.AsMapNode();
         Assert.NotNull(addressMap);
         Assert.True(addressMap.OneLine);
     }
@@ -29,10 +29,10 @@ public class OneLineTest
                              }}        
                              """;
         var root = TfVarsContent.Parse(input);
-        var userMap = root.Child("user").Value.AsMap();
+        var userMap = root.Child("user").Value.AsMapNode();
         Assert.NotNull(userMap);
         Assert.False(userMap.OneLine);
-        Assert.True(userMap.Child("address").Value.AsMap().OneLine);
+        Assert.True(userMap.Child("address").Value.AsMapNode().OneLine);
 
         Assert.NotNull(root);
     }
@@ -50,11 +50,11 @@ public class OneLineTest
                              ]
                              """;
         var root = TfVarsContent.Parse(input);
-        var usersList = root.Child("users").Value.AsList();
+        var usersList = root.Child("users").Value.AsListNode();
         Assert.NotNull(usersList);
         Assert.Equal(2, usersList.Children().Count());
-        Assert.True(usersList.ChildAt(0).AsMap().OneLine);
-        Assert.False(usersList.ChildAt(1).AsMap().OneLine);
+        Assert.True(usersList.ChildAt(0).AsMapNode().OneLine);
+        Assert.False(usersList.ChildAt(1).AsMapNode().OneLine);
     }
 
     [Fact(DisplayName = "Variable with oneline list")]
@@ -64,7 +64,7 @@ public class OneLineTest
                              users = [""John Doe"", ""Jane Doe""]
                              """;
         var root = TfVarsContent.Parse(input);
-        var usersList = root.Child("users").Value.AsList();
+        var usersList = root.Child("users").Value.AsListNode();
         Assert.NotNull(usersList);
         Assert.True(usersList.OneLine);
     }
@@ -79,7 +79,7 @@ public class OneLineTest
                              ]
                              """;
         var root = TfVarsContent.Parse(input);
-        var usersList = root.Child("users").Value.AsList();
+        var usersList = root.Child("users").Value.AsListNode();
         Assert.NotNull(usersList);
         Assert.False(usersList.OneLine);
     }
