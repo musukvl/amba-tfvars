@@ -54,6 +54,25 @@ public class ListNode : CollectionNode, IList<TfVarsNode>
         }
     }
 
+    public override TfVarsNode Add(string key, TfVarsNode node)
+    {
+        if (int.TryParse(key, out var intKey))
+        {
+            Values.Insert(intKey, node);
+            return this;
+        }
+        throw new ArgumentException("Key must be an number", nameof(key));
+    }
+    
+    public override TfVarsNode Remove(string key)
+    {
+        if (int.TryParse(key, out var intKey))
+        {
+            Values.RemoveAt(intKey);
+            return this;
+        }
+        throw new ArgumentException("Key must be an number", nameof(key));
+    }
 
     #region IList<TfVarsNode> Implementation
     public int Count => Values.Count;

@@ -19,6 +19,14 @@ public class MapNode : CollectionNode
             Pairs.AddLast(new MapPairNode(key, value));
         }
     }
+    
+    public MapNode(List<KeyValuePair<string, TfVarsNode>> pairs, bool oneLine = false) 
+    {
+        foreach (var (key, value) in pairs)
+        {
+            Pairs.AddLast(new MapPairNode(key, value));
+        }
+    }
 
     public MapPairNode Child(string key)
     {
@@ -28,6 +36,22 @@ public class MapNode : CollectionNode
     public override IEnumerable<TfVarsNode> Children()
     {
         return Pairs;
+    }
+    
+    public override TfVarsNode Add(string key, TfVarsNode value)
+    {
+        Pairs.AddLast(new MapPairNode(key, value));
+        return this;
+    }
+    
+    public override TfVarsNode Remove(string key)
+    {
+        var pair = Pairs.FirstOrDefault(x => x.Key == key);
+        if (pair is not null)
+        {
+            Pairs.Remove(pair);
+        }
+        return this;
     }
 
     public override TfVarsNode? this[object key]
@@ -58,4 +82,5 @@ public class MapNode : CollectionNode
                 throw new ArgumentException("Key must be a string", nameof(key));
         }
     }
+
 }

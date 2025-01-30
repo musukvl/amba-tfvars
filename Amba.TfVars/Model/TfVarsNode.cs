@@ -12,6 +12,16 @@ public abstract class TfVarsNode : ITfVarsNodeEnumerable<TfVarsNode>
         set => throw new InvalidOperationException(@$"Cannot set child value on {GetType()}.");
     }
 
+    public virtual TfVarsNode Add(string key, TfVarsNode node)
+    {
+        throw new InvalidOperationException(@$"Cannot add child value on {GetType()}.");
+    }
+    
+    public virtual TfVarsNode Remove(string key)
+    {
+        throw new InvalidOperationException(@$"Cannot add child value on {GetType()}.");
+    }
+    
     #region operators
     
     public static explicit operator bool(TfVarsNode value)

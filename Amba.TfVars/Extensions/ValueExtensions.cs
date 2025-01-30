@@ -30,19 +30,50 @@ public static class ValueExtensions
     
     public static string? AsString(this TfVarsNode? node)
     {
+        if (node is null)
+        {
+            return null;
+        }
+        if (node is NumberNode)
+        {
+            return (node as NumberNode)?.Value.ToString();
+        }
+        if (node is BoolNode)
+        {
+            return (node as BoolNode)?.Value.ToString();
+        }
         if (node is NullNode)
         {
             return null;
         }
-        return (node as StringNode)?.Value;
+        if (node is StringNode)
+        {
+            return (node as StringNode)?.Value;
+        }
+        throw new System.InvalidOperationException($"Cannot convert {node?.GetType()} to string.");
     }
     
-    public static decimal AsDecimal(this TfVarsNode? node)
+    public static decimal? AsDecimal(this TfVarsNode? node)
     {
+        if (node is null)
+        {
+            return null;
+        }   
+        if (node is NumberNode numberNode)
+        {
+            return numberNode.Value;
+        }
         if (node is NullNode)
         {
             return 0;
         }
-        return (node as NumberNode)?.Value ?? 0;
+        if (node is StringNode stringNode)
+        {
+            if (decimal.TryParse(stringNode.Value, out var result))
+            {
+                return result;
+            }
+        }
+        throw new System.InvalidOperationException($"Cannot convert {node?.GetType()} to decimal.");
     }
 }

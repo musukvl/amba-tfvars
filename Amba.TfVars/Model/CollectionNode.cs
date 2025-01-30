@@ -1,4 +1,7 @@
-﻿namespace Amba.TfVars.Model;
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Amba.TfVars.Model;
 
 public abstract class CollectionNode : TfVarsNode
 {
