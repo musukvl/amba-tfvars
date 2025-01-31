@@ -13,7 +13,8 @@ public class TreeModificationTests
                                    email = "x@x.com"
                                    meta = {
                                        age = 30
-                                   }                    
+                                   }
+                                   tags = ["1", "2", "3"]         
                                },
                                "jane" = {
                                    name = "Jane"
@@ -21,6 +22,7 @@ public class TreeModificationTests
                                    meta = {
                                        age = 25
                                    }
+                                   tags = ["10"]    
                                }
                             }
                            """;
@@ -35,6 +37,7 @@ public class TreeModificationTests
         var oldUsers = new MapNode();
         foreach (var userPair in users.Pairs)
         {
+            userPair.Value["tags"].AsListNode().AddItem("100");
             if (userPair.Value["meta"]["age"].AsNumberNode().Value < 30)
             {
                 youngUsers.Add(userPair.Key, userPair.Value);
@@ -63,6 +66,7 @@ public class TreeModificationTests
                                    meta = {
                                        age = 25
                                    }
+                                   tags = ["10", "100"]
                                }
                            }
                            old = {
@@ -72,6 +76,7 @@ public class TreeModificationTests
                                    meta = {
                                        age = 30
                                    }
+                                   tags = ["1", "2", "3", "100"]
                                }
                            }
                        }

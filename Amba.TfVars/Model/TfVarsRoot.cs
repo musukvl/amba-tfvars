@@ -35,6 +35,7 @@ public class TfVarsRoot : TfVarsNode
             if (key is string strKey)
             {
                 Variables[strKey] = new VariableDefinitionNode(strKey, value);
+                return;
             }
             throw new ArgumentException("Key must be a string", nameof(key));
         }

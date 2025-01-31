@@ -1,4 +1,6 @@
-﻿namespace Amba.TfVars.Model;
+﻿using System;
+
+namespace Amba.TfVars.Model;
 
 public class StringNode : ValueNode
 {
@@ -8,10 +10,13 @@ public class StringNode : ValueNode
     {
     }
 
-    public StringNode(string value)
+    public StringNode(string value, string? commentAfter = null)
     {
         Value = value;
+        CommentAfter = commentAfter;
     }
+    
+    
 
     public override string ToString()
     {

@@ -13,12 +13,15 @@ public class MapPairNode : TfVarsNode
 
     public override TfVarsNode? this[object key]
     {
-        get => Value[key];
-        set => Value[key] = value;
+        get => Value?[key];
+        set
+        {
+            if (Value != null) Value[key] = value;
+        }
     }
 
     public string Key { get; }
     public string OriginalKey { get; }
-    public TfVarsNode Value { get; set; }
+    public TfVarsNode? Value { get; set; }
     public string[] CommentsBefore { get; set; } = Array.Empty<string>();
 }

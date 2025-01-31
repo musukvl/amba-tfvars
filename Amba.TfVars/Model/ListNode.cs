@@ -53,26 +53,22 @@ public class ListNode : CollectionNode, IList<TfVarsNode>
             Values[intKey] = value ?? throw new ArgumentNullException(nameof(value), "List element can't be null");
         }
     }
+    
+    #region Modification Methods
 
-    public override TfVarsNode Add(string key, TfVarsNode node)
+    public ListNode AddItem(TfVarsNode node)
     {
-        if (int.TryParse(key, out var intKey))
-        {
-            Values.Insert(intKey, node);
-            return this;
-        }
-        throw new ArgumentException("Key must be an number", nameof(key));
+        Values.Add(node);
+        return this;
     }
     
-    public override TfVarsNode Remove(string key)
+    public ListNode SetOneLine(bool oneLine)
     {
-        if (int.TryParse(key, out var intKey))
-        {
-            Values.RemoveAt(intKey);
-            return this;
-        }
-        throw new ArgumentException("Key must be an number", nameof(key));
+        OneLine = oneLine;
+        return this;
     }
+    
+    #endregion
 
     #region IList<TfVarsNode> Implementation
     public int Count => Values.Count;
@@ -119,10 +115,11 @@ public class ListNode : CollectionNode, IList<TfVarsNode>
         Values.RemoveAt(index);
     }
 
-    public new TfVarsNode this[int index]
+    public TfVarsNode this[int index]
     {
         get => Values[index];
         set => Values[index] = value ?? throw new ArgumentNullException(nameof(value));
     }
     #endregion
+    
 }

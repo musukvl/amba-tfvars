@@ -8,11 +8,20 @@ public class MapNode : CollectionNode
 {
     public LinkedList<MapPairNode> Pairs { get; } = new();
 
-    public MapNode()
+    public MapNode(bool oneLine = false)
     {
+        OneLine = oneLine;
     }
 
     public MapNode(Dictionary<string, TfVarsNode> pairs, bool oneLine = false) 
+    {
+        foreach (var (key, value) in pairs)
+        {
+            Pairs.AddLast(new MapPairNode(key, value));
+        }
+    }
+    
+    public MapNode(Dictionary<string, string> pairs, bool oneLine = false) 
     {
         foreach (var (key, value) in pairs)
         {
@@ -38,13 +47,37 @@ public class MapNode : CollectionNode
         return Pairs;
     }
     
-    public override TfVarsNode Add(string key, TfVarsNode value)
+    # region Modification Methods
+    
+    public MapNode SetOneLine(bool oneLine)
+    {
+        OneLine = oneLine;
+        return this;
+    }
+
+    
+    public MapNode Add(string key, TfVarsNode value)
     {
         Pairs.AddLast(new MapPairNode(key, value));
         return this;
     }
     
-    public override TfVarsNode Remove(string key)
+    public MapNode Property(string key, TfVarsNode value, string? commentsBefore = null)
+    {
+        var pair = new MapPairNode(key, value);
+        if (commentsBefore != null)
+            pair.CommentsBefore = commentsBefore.Split("\n");
+        Pairs.AddLast(pair);
+        return this;
+    }
+    
+    public MapNode ParagraphProperty(string key, TfVarsNode value)
+    {
+        this.Property(key, value, "");
+        return this;
+    }
+    
+    public MapNode Remove(string key)
     {
         var pair = Pairs.FirstOrDefault(x => x.Key == key);
         if (pair is not null)
@@ -53,6 +86,8 @@ public class MapNode : CollectionNode
         }
         return this;
     }
+    
+    #endregion
 
     public override TfVarsNode? this[object key]
     {
@@ -82,5 +117,4 @@ public class MapNode : CollectionNode
                 throw new ArgumentException("Key must be a string", nameof(key));
         }
     }
-
 }

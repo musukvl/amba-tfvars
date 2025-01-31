@@ -57,6 +57,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
+| 1.7.0   | Move add/remove methods to collection implementation level.                                        |
 | 1.6.2   | Improve map modification methods: add, delete, etc.                                                |
 | 1.6.1   | Improve tree navigation methods.                                                                   |
 | 1.5.3   | Support comment for one-line maps and lists.                                                       |
