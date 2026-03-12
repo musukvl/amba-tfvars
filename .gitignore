@@ -8,3 +8,5 @@ nupkg/
 *.so
 *.DotSettings.user
 output.tfvars
+__reports/
+__scripts/

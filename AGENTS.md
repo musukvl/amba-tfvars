@@ -38,3 +38,4 @@ dotnet test Amba.TfVars.slnx
 
 ## Packaging
 - Core NuGet package is produced from `Amba.TfVars/Amba.TfVars.csproj` (`GeneratePackageOnBuild=true`).
+- The `PackageReleaseNotes`, `Version` and similar properties shouldn't be present in `.csproj` file, but passed as /p: parameter into on build/package stage.

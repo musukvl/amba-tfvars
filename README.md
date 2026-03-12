@@ -2,8 +2,9 @@
 
 
 This is a simple parser and serializer for Terraform `.tfvars` files into a tree of nodes.
-The main purpose is to provide a way to refactor and restructure for transform `.tfvars` files.
+The main purpose is to provide a way to generate, refactor, restructure and transform `.tfvars` files.
 The library is written in C# and it is based on the  [ANTLR4](https://www.antlr.org/) library.
+The focus of parser is not just serialize/deserialize data into `.tfvars` file format, but provide code-DOM to work with comments and list/map formatting. 
 
 ## Installation
 
