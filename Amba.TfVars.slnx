@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Amba.TfVars/Amba.TfVars.csproj" />
+  <Project Path="Amba.TfVarsCli/Amba.TfVarsCli.csproj" />
+  <Project Path="Amba.TfVarsTests/Amba.TfVarsTests.csproj" />
+</Solution>

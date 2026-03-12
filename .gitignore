@@ -1,9 +1,10 @@
 ﻿.idea/
 bin/
 obj/
-.user
-.so
-.DotSettings.user
-.nupkg
 nupkg/
+*.nupkg
+*.snupkg
+*.user
+*.so
+*.DotSettings.user
 output.tfvars

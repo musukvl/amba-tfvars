@@ -37,7 +37,7 @@ partial class TfVarsSerializer
 
     private void SerializeListOneLine(ListNode listNode, int depth)
     {
-        _sb.Append("[");
+        _sb.Append('[');
         for (var index = 0; index < listNode.Values.Count; index++)
         {
             var value = listNode.Values[index];
@@ -46,11 +46,11 @@ partial class TfVarsSerializer
                 _sb.Append(", ");
         }
 
-        _sb.Append("]");
+        _sb.Append(']');
 
         if (listNode.CommentsAfter != null)
         {
-            _sb.Append(" ");
+            _sb.Append(' ');
             _sb.Append(listNode.CommentsAfter);
         }
     }

@@ -12,8 +12,8 @@ public abstract class CollectionNode : TfVarsNode
     ///   users = [1, 2, 3]
     /// ```
     /// </summary>
-    public bool OneLine { get; set; } = false;
-    public string? CommentsAfter { get; set; } = null;
+    public bool OneLine { get; set; }
+    public string? CommentsAfter { get; set; }
 
     public CollectionNode()
     {

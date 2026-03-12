@@ -23,7 +23,7 @@ partial class TfVarsSerializer
         _sb.AppendLine("{");
 
         var doFormatting = DoMapFormatting(mapNode);
-        var maxKeyLength = mapNode.Pairs.Any() ? mapNode.Pairs.Max(x => x.OriginalKey.Length) : 0;
+        var maxKeyLength = mapNode.Pairs.Count > 0 ? mapNode.Pairs.Max(x => x.OriginalKey.Length) : 0;
 
         foreach (var mapPair in mapNode.Pairs)
         {
@@ -61,29 +61,29 @@ partial class TfVarsSerializer
 
     private void SerializeOneLineMap(MapNode mapNode, int depth)
     {
-        _sb.Append("{");
+        _sb.Append('{');
         var values = mapNode.Pairs.ToArray();
         for (var i = 0; i < values.Length; i++)
         {
             var mapPair = values[i];
-            _sb.Append(" ");
+            _sb.Append(' ');
 
             _sb.Append(mapPair.OriginalKey);
             _sb.Append(" = ");
             Serialize(mapPair.Value, depth + 1);
             if (i < values.Length - 1)
             {
-                _sb.Append(",");
+                _sb.Append(',');
             }
             else
             {
-                _sb.Append(" ");
+                _sb.Append(' ');
             }
         }
-        _sb.Append("}");
+        _sb.Append('}');
         if (mapNode.CommentsAfter is not null)
         {
-            _sb.Append(" ");
+            _sb.Append(' ');
             _sb.Append(mapNode.CommentsAfter);
         }
     }

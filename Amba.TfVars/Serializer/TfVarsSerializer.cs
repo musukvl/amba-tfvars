@@ -5,7 +5,7 @@ using Amba.TfVars.Model;
 
 namespace Amba.TfVars.Serializer;
 
-internal partial class TfVarsSerializer
+internal sealed partial class TfVarsSerializer
 {
     private readonly StringBuilder _sb;
     private readonly SerializerOptions _options;
@@ -24,9 +24,9 @@ internal partial class TfVarsSerializer
                 _sb.Append(numberNode.Value.ToString(CultureInfo.InvariantCulture));
                 break;
             case StringNode stringNode:
-                _sb.Append("\"");
+                _sb.Append('"');
                 _sb.Append(stringNode.Value);
-                _sb.Append("\"");
+                _sb.Append('"');
                 break;
             case BoolNode boolNode:
                 _sb.Append(boolNode.Value ? "true" : "false");
@@ -50,7 +50,7 @@ internal partial class TfVarsSerializer
 
         if (node is ValueNode valueNode && !string.IsNullOrWhiteSpace(valueNode.CommentAfter))
         {
-            _sb.Append(" ");
+            _sb.Append(' ');
             //TODO: Check comment after in case of list
             _sb.Append(valueNode.CommentAfter);
         }

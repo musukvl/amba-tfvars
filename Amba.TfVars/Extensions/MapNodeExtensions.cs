@@ -14,7 +14,7 @@ public static class MapNodeExtensions
     /// <param name="keysOrder"></param>
     public static void ReorderKeys(this MapNode mapNode, params string[] keysOrder)
     {
-        foreach (var key in keysOrder.Reverse())
+        foreach (var key in Enumerable.Reverse(keysOrder))
         {
             foreach (var node in mapNode.Pairs)
             {
@@ -36,7 +36,7 @@ public static class MapNodeExtensions
     public static void AddAfter(this MapNode mapNode, string keyBefore, string newKey, TfVarsNode value)
     {
         var mapPair = new MapPairNode(newKey, value);
-        if (mapNode.Pairs.Any() == false)
+        if (mapNode.Pairs.Count == 0)
         {
             mapNode.Pairs.AddFirst(mapPair);
             return;
@@ -46,6 +46,7 @@ public static class MapNodeExtensions
         if (target is null)
         {
             mapNode.Pairs.AddLast(mapPair);
+            return;
         }
         mapNode.Pairs.AddAfter(target, mapPair);
     }
@@ -66,7 +67,7 @@ public static class MapNodeExtensions
     
     public static LinkedListNode<T>? FindNode<T>(this LinkedList<T> list, Predicate<T> match)
     {
-        LinkedListNode<T> current = list.First;
+        LinkedListNode<T>? current = list.First;
         while (current != null)
         {
             if (match(current.Value))

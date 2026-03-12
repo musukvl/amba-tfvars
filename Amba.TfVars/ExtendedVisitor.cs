@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Amba.TfVars.Model;
 using Antlr4.Runtime;
@@ -51,7 +52,7 @@ public partial class ExtendedVisitor : TfVarsBaseVisitor<object>
     public override object VisitBoolean(TfVarsParser.BooleanContext context)
     {
         var commentAfter = GetCommentsAfterToken(context.Stop);
-        var result = new BoolNode(context.GetText().ToLower() == "true")
+        var result = new BoolNode(string.Equals(context.GetText(), "true", StringComparison.OrdinalIgnoreCase))
         {
             CommentAfter = commentAfter
         };

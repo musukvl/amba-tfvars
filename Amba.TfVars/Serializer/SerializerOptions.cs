@@ -15,7 +15,7 @@ public class SerializerOptions
     /// <summary>
     ///  Include a trailing comma in the list
     /// </summary>
-    public bool IncludeListTrailingComma { get; set; } = false;
+    public bool IncludeListTrailingComma { get; set; }
 
 
 
