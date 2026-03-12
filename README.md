@@ -57,7 +57,7 @@ Assert.Equal(25, (int)parsed["users"][0]["meta"]["age"]);
 
 | Version | Description                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------|
-| 1.8.0   | Update dotnet version to .net 10.                                                                  |
+| 1.8.0   | Modernize to .NET 10, convert the solution to `.slnx`, update dependencies, and clean package artifacts. |
 | 1.7.0   | Move add/remove methods to collection implementation level.                                        |
 | 1.6.2   | Improve map modification methods: add, delete, etc.                                                |
 | 1.6.1   | Improve tree navigation methods.                                                                   |
